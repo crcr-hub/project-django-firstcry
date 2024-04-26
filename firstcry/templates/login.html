@@ -1,0 +1,87 @@
+{% extends 'baseForLoginandRegister.html' %}
+
+
+{% block htmlhead %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/css.css' %}">    
+<style>
+    h6{
+        font-size: 12px;
+    }
+	.forgot:hover .span1 {	
+		color: darkblue;
+		text-decoration: underline;
+	}
+	
+	#forgot:hover #span2 {	
+		color: white;
+		text-decoration: underline;
+	}
+</style> 
+{% endblock htmlhead %} 
+
+{% block content %}
+<!-- <div style="height: 100%; width: 100%; margin-top: 100px; margin-left: 50px;">
+
+    <form action="user_login" method="post">
+        {% csrf_token %}
+
+        <div style="margin-left: 200px;"><h4>Login</h4> 
+           Email ID   : &nbsp; &nbsp;<input type="text" name="email" style="width: 300px"></div><br>
+          <div style="margin-left: 200px;"> Password   : <input type="password" name="password" style="width: 300px"></div>
+        <div style="margin-left: 200px;">
+            {% for message in messages %}
+            <h6 style="color: red;">{{message}}</h6>
+            {% endfor %}
+         </div>
+       <div style="margin-left: 200px;"> <button class="button-87" type="submit" >Login</button></div>
+
+    </form>
+</div> -->
+
+
+
+
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+            <form action="{% url 'user_login' %}" method="post" class="login">
+                {% csrf_token %}
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="text" class="login__input" placeholder="Email" name="email" required>
+				</div>
+				<div class="login__field" >
+					<i class="login__icon fas fa-lock"></i>
+					<input type="password" class="login__input" placeholder="Password" name="password" required>
+				
+					<div style=" width: 200px; position: absolute; margin-left: 150px; margin-top: 5px;">
+						<a href="{% url 'register' %}?name=forgot" class="forgot"><span class="span1">Forget</span> <span id="span2" style="color: beige;">Password?</span></a></div>
+				</div>
+				
+                {% for message in messages %}
+                <h6 style="color: red;">{{message}}</h6>
+                {% endfor %}
+				<button class="button login__submit" type="submit">
+					<span class="button__text">Log In Now</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>				
+			</form>
+			<div class="social-login">
+				<h5 style="font-size: 15px;">Not Registered ?</h5>
+                <h5 style="font-size: 15px; color: aliceblue;"><a href="{% url 'register' %}">Click Here to Register</a></h5>
+				
+			</div>
+		</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>		
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>		
+	</div>
+</div>
+    {% endblock %}
+
+    <!-- HTML !-->
+

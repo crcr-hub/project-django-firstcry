@@ -1,0 +1,77 @@
+{%load static %}
+<table class="table table-bordered">
+    {% if type == 1 %}
+    <tr>
+        <td> Order ID </td>
+        <td> Customer ID</td>
+        <td> Customer Email</td>
+        <td> Total Amount</td>
+        <td> Payment Method</td>
+        <td> Date</td>
+        <td> Ship To </td>
+    </tr>
+    {%for x in dd %}
+    <tr>
+        <td> {{x.id}}</td>
+        <td>{{x.user.id}}</td>
+        <td>{{x.user.email}}</td>
+        <td>{{x.total_amount}}</td>
+        <td>{{x.payment_method}}</td>
+        <td>{{x.date}}</td>
+        <td>
+
+            {{x.user_name}} <br>
+            {{x.user_housename}} <br>
+            {{x.user_street}} ,{{x.user_city}} <br>
+            {{x.user_state}} - {{x.user_pincode}}
+
+        </td>
+    </tr>
+    {%endfor%}
+    {%else%}
+    <tr>
+        <td>Order ID</td>
+        <td> Customer Email</td>
+        <td> Product </td>
+        <td> Size </td>
+        <td> Quantity</td>
+        <td> Total Amount</td>
+        <td> Date </td>
+    </tr>
+    {% for x in dd %}
+    <tr>
+        <td>{{x.order.id}}</td>
+        <td>{{x.order.user.email}}</td>
+        <td>{{x.product.name}}</td>
+        <td>
+            {% if x.size == 'zerotothreeM'%}
+            0 - 3 M
+            {% elif x.size == 'threetosixM' %}
+            3 - 6 M 
+            {%elif x.size == 'sixtonineM' %}
+            6 - 9 M
+            {%elif x.size == 'ninetotwelveM' %}
+            9 - 12 M
+            {%elif x.size == 'twelvetoeighteenM' %}
+            12 - 18 M
+            {% elif x.size == 'eighteentotwentyfourM' %}
+            18 - 24 M
+            {%elif x.size == 'twotofourY' %}
+            2 - 4 Y
+            {%elif x.size == 'fourtosixY' %}
+            4 - 6 Y
+            {%elif x.size == 'sixtoeightY' %}
+            6 - 8 Y
+            {%endif%}
+            
+        </td>
+        <td>{{x.quantity}}</td>
+        <td>{{x.total}}</td>
+        <td>{{x.order.date}}</td>
+    </tr>
+    {%endfor%}
+    {%endif%}
+    
+</table>
+<button type="submit" name="pdf" class="btn btn-outline-success btn-fw"> Download PDF</button> <button name="excel" type="submit" class="btn btn-outline-success btn-fw"> Download EXCEL</button>
+<script src="{% static 'js/sales-report-download.js' %}"></script>

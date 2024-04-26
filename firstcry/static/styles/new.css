@@ -1,0 +1,80 @@
+
+
+.link-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    
+  }
+  .link-button-indetail{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 210px;
+    margin-left: 15px;
+  }
+
+  .link-button-indetail:hover{
+    background-color: #357a37;
+    text-decoration: none;
+    color: white;
+
+  }
+  .link-button2-indetail {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 0.1px solid #a1a0a0;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: black;
+    width: 210px;
+    
+  }
+
+  .link-button2-indetail:hover {
+    border: 2px solid #191919;
+    color: black;
+  }
+
+  .link-button2 {
+    display: inline-block;
+    padding: 10px 20px;
+    border: 0.1px solid #a1a0a0;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    color: black;
+    
+  }
+
+  .link-button2:hover {
+    border: 1px solid #191919;
+    color: black;
+  }

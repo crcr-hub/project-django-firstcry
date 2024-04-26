@@ -1,0 +1,7 @@
+<select class="form-control form-control-sm" id="brandSelect"  name="brand">
+    <option value=""> Select a Brand</option>
+   
+    {% for br in brand %}
+    <option  value="{{br.id}}" >{{br.name}}</option>
+    {% endfor %}
+</select> 

@@ -1,0 +1,36 @@
+
+
+
+<select class="form-control form-control-sm" id="colorSelect" onchange="updateColor()" name="color">
+    <option value=""> Select a Color</option>
+    {% for c in color %}
+    <option class="color-option"  value="{{c.id}}"  data-id = "{{c.code}}">{{c.name}}</option>
+    {% endfor %}
+</select>
+<br>
+
+<script>
+    function updateColor() {
+        var select = document.getElementById("colorSelect");
+        var selectedColor = select.options[select.selectedIndex].value;
+        console.log(select)
+        console.log(selectedColor)
+        select.style.backgroundColor = selectedColor;
+    }
+</script>
+
+<script>
+  $(document).ready(function() {
+      // Loop through each option and set background color dynamically
+      $('#colorSelect option').each(function() {
+        var dataId = $(this).data('id');
+        $(this).css('background-color', dataId);
+      });
+
+      // Change select background color when an option is selected
+      $('#colorSelect').change(function() {
+          var selectedColor = $(this).children('option:selected').css('background-color');
+          $(this).css('background-color', selectedColor);
+      });
+  });
+</script>

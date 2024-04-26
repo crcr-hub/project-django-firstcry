@@ -1,0 +1,40 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantity Selector</title>
+    <style>
+        #unitPrice {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Total Amount: $<span id="totalAmount">2000</span></h1>
+    <p><span id="unitPrice">2000</span></p>
+    <input type="number" class="quantity-input" value="{{ item.quantity }}" min="1" max =10 data-item-id="{{ item.id }}">
+    <label for="quantity">Select Quantity:</label>
+    <select id="quantity" name="quantity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <!-- Add more options as needed -->
+    </select>
+
+    <script>
+        // Function to update the total amount based on the selected quantity
+        function updateTotalAmount() {
+            var quantity = parseInt(document.getElementById('quantity').value, 10);
+            var unitPrice = parseFloat(document.getElementById('unitPrice').textContent);
+     // Replace with the actual unit price of your product
+            var totalAmount = quantity * unitPrice;
+
+            // Update the total amount on the page
+            document.getElementById('totalAmount').textContent = totalAmount;
+        }
+
+        // Attach the updateTotalAmount function to the change event of the quantity dropdown
+        document.getElementById('quantity').addEventListener('change', updateTotalAmount);
+    </script>
+</body>
+</html>

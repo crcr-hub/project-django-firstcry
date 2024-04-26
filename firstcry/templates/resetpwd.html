@@ -1,0 +1,81 @@
+{% extends 'baseForLoginandRegister.html' %}
+
+
+{% block htmlhead %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/css.css' %}">    
+<style>
+    h6{
+        font-size: 12px;
+    }
+    .resend:hover  .h6{
+        text-decoration: underline;
+
+    }
+    .tablediv{
+        height: 300px; 
+        width: 600px;  
+        margin-left: 30%; 
+       
+        box-shadow: green 0px 0px 5px 2px;
+    }
+</style> 
+{% endblock htmlhead %} 
+
+{% block content %}
+<div style="height: 40px; width: 600px; margin-top: 100px; margin-left: 30%;"> <h5 >Reset Your Password</h5>
+    <div style="height: 1px; width: 100%; background-color: black;  "> </div>
+</div>
+<div class="tablediv" >
+    <div style="height: 20px; width: 100%;  "> </div>
+    <form action="{% url 'forgotpwd' %}" method="post">
+        {% csrf_token %}
+        <table >
+       
+            <tr>
+                <td style="padding-right: 60px; padding-left: 20px;"><h5 style="font-size: 17px;"> Enter New Password </h5></td>
+                <td> <div ><h6>New Password</h6> 
+                    <input type="text" id="npwd" name="otp" style="width: 300px; height: 40px; margin-left: 5px;"></div>
+                </td>
+        </tr>
+        <tr>
+            <td style="padding-right: 60px; padding-left: 20px;"><h5 style="font-size: 17px;"> Repeat New Password </h5></td>
+            <td> <div ><h6>Repeat New Password</h6> 
+                <input type="text" id="rnpwd" name="pwd" style="width: 300px; height: 40px; margin-left: 5px;"></div>
+            </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><label for="" id="msg" style="font-size: 12px; color: red;"></label></td>
+    </tr>
+        <tr>
+            <td></td><td>
+
+
+                <div >
+                    {% for message in messages %}
+                    <h6 style="color: red;">{{message}}</h6>
+                    {% endfor %}
+                 </div>
+               <div > 
+                <input type="hidden" value="{{email}}" name="email">
+                <button class="button-87" type="button" style="width: 300px;" id="reset" >Submit</button>
+               
+                </div>
+            </td>
+        </tr>
+        </table>
+       
+
+    </form>
+
+   
+</div>
+
+
+    {% endblock %}
+    {% block extrascripts %}
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{% static 'js/resetpwd.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    {% endblock extrascripts %}

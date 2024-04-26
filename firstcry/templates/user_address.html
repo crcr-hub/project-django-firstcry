@@ -1,0 +1,673 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatic Carousel</title>
+
+  <link rel="stylesheet" type="text/css" href=" {% static 'styles/css.css' %}" />
+
+
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap.min.css ' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/font-awesome.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/templatemo-hexashop.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/menubar.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/new.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/foruser.css' %}">
+
+  <link rel="stylesheet" href="{% static 'adminstyle2/css/style.css' %}">
+  <!-- End layout styles -->
+  <link rel="shortcut icon" href="{% static 'adminstyle2/images/favicon.ico' %}" />
+
+
+
+
+<style>
+
+   #menu1234 {
+
+    background-color: #ffffff;
+    color: rgb(16, 16, 16);
+    padding: 20px;
+}
+
+#data {
+    flex: 1;
+    padding: 20px;
+}
+
+#menu1234 a {
+    text-decoration: none;
+    color: rgb(10, 10, 10);
+    display: block;
+    margin-bottom: 10px;
+    font-size: 15px;
+    height: 35px;
+    border-top: 5px solid #fefcfc; /* Initially set the top border */
+    transition: border-top-color 0.3s; /* Transition for a smooth effect */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#menu1234 a:hover {
+    background-color: #c6c5c5;
+    border-top-color: #c6c5c5; /* Change the top border color on hover */
+}
+#menu1234 a span{
+    margin-left: 20px;
+}
+body {
+  background-color: rgb(239, 234, 234);
+}
+#images {
+  flex-grow: 1; /* This makes the images div take up the remaining space */
+  display: block;
+  flex-wrap: wrap; /* Allow images to wrap to the next line */
+  justify-content: space-between; /* Adjust the spacing between columns */
+  padding: 20px;
+}
+
+#images img {
+  width: 100%; /* Adjust the width of each image, accounting for spacing */
+  margin-bottom: 20px; /* Add some spacing between images */
+  box-sizing: border-box; /* Include padding and border in the width */
+}
+
+.edit-container123 {
+    display: none;
+}
+
+
+.edit-container {
+    display: none;
+}
+
+</style>
+</head>
+<body>
+<header>
+
+  <div >
+    <div class="mainlogo"><img src="{% static 'images/fc_logo.png' %}" alt="">  
+                    <div class="about">
+                        
+                        <ul>
+
+                          <li><a href="{% url 'logout'%}">Logout | </a></li>
+                          <li><a href="{% url 'useraccount'%}">Account </a><span>|</span></li>
+                            <li><a href="{% url 'wishlist' %}">Wishlist </a><span>|</span></li>
+                            <li><a href="{% url 'cart' %}">Cart</a></li>
+            
+                        </ul>
+                    </div>
+        </div>
+    </div>   
+
+    <!-- ***** Header Area End ***** -->
+
+  <!-- navmenu -->
+    <nav >
+        <div class="wrapper">
+          <input type="radio" name="slider" id="menu-btn">
+          <input type="radio" name="slider" id="close-btn">
+          <ul class="nav-links">
+            <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+            <li><a href="{% url 'userhome' %}">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li>
+              <a href="#" class="desktop-item">Dropdown Menu</a>
+              <input type="checkbox" id="showDrop">
+              <label for="showDrop" class="mobile-item">Dropdown Menu</label>
+              <ul class="drop-menu">
+                <li><a href="#">Drop menu 1</a></li>
+                <li><a href="#">Drop menu 2</a></li>
+                <li><a href="#">Drop menu 3</a></li>
+                <li><a href="#">Drop menu 4</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="desktop-item">Mega Menu</a>
+              <input type="checkbox" id="showMega">
+              <label for="showMega" class="mobile-item">Mega Menu</label>
+              <div class="mega-box">
+                <div class="content">
+                  <div class="row">
+                
+                  </div>
+                  <div class="row">
+                    <header>Design Services</header>
+                    <ul class="mega-links">
+                      <li><a href="#">Graphics</a></li>
+                      <li><a href="#">Vectors</a></li>
+                      <li><a href="#">Business cards</a></li>
+                      <li><a href="#">Custom logo</a></li>
+                    </ul>
+                  </div>
+                  <div class="row">
+                    <header>Email Services</header>
+                    <ul class="mega-links">
+                      <li><a href="#">Personal Email</a></li>
+                      <li><a href="#">Business Email</a></li>
+                      <li><a href="#">Mobile Email</a></li>
+                      <li><a href="#">Web Marketing</a></li>
+                    </ul>
+                  </div>
+                  <div class="row">
+                    <header>Security services</header>
+                    <ul class="mega-links">
+                      <li><a href="#">Site Seal</a></li>
+                      <li><a href="#">VPS Hosting</a></li>
+                      <li><a href="#">Privacy Seal</a></li>
+                      <li><a href="#">Website design</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li><a href="#">Feedback</a></li>
+          </ul>
+          <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+        </div>
+      </nav>
+
+</header>
+<div style="width: 100%; height: 100px;">
+
+</div>
+
+<!-- End of the navmenu-->
+
+
+
+  <!-- partial:partials/_sidebar.html -->
+  
+
+
+  <div >
+    <div class="container" >
+    <div style="display: flex; background-color: #ffffff;">
+
+       
+              <div id="menu1234" style="width: 300px;">
+                <h3>My Account</h2>
+                  <div style="height: 20px;"></div>
+               
+                <div style="height: 40px; background-color: bisque;"> <h5 style=" border-top: 10px solid bisque; margin-left: 10px; " >My Orders </h4></div>
+                <div style="height: 20px;"></div>
+                <div > <a href="{% url 'orderhistory' %}" ><span >Order Hisotory</span></a></div>
+                <div ><a href="{% url 'showReturnedOrders' %}"><span>Manage Returns</span></a></div>
+                <div ><a href="" ><span>Track Order</span></a></div>
+                <div style="height: 20px;"></div>
+                <div style="height: 20px;"></div>
+         
+                <div style="height: 40px; background-color: bisque;"> <h5 style=" border-top: 10px solid bisque; margin-left: 10px; " >My Profile </h4></div>
+                <div style="height: 20px;"></div>
+                <div > <a href="{% url 'personal' %}" ><span >Personal Details</span></a></div>
+                <div ><a href="{% url 'show_changepassword' %}"><span>Change Password</span></a></div>
+                <div style="background-color: #c6c5c5;"  ><a href="{% url 'show_address' %}" ><span>My address Book</span></a></div>
+            
+                <div style="height: 20px;"></div>
+                <div style="height: 20px;"></div>
+         
+                <div style="height: 40px; background-color: bisque;"> <h5 style=" border-top: 10px solid bisque; margin-left: 10px; " >My Wallet </h4></div>
+                  <div  style="height: 20px;"></div>
+                  <div  > <a href="{% url 'show_wallet' %}" ><span >Cash in Wallet</span></a></div>
+                  <div  > <a href="{% url 'wallet_transaction' %}" ><span >Refund Transactions</span></a></div>
+            
+            </div>
+     
+            <div id="images" style="background-color: #ffffff;; margin-left: 50px;  box-shadow: 2px 2px 5px;">
+              <!-- Your images go here -->
+              <div style="height: 40px;"> <h5 style=" margin-left: 10px; "> Address Book</h4></div>
+                <div style="height: 60px;width: 100%; border-radius: 10px; background-color:rgb(239, 234, 234);"></div>
+              {% if start %}
+              <div>
+                Enter Your address Details 
+              </div>
+
+
+              <div style=" display: flex;"  id="view-container">
+                <div class="address"  id="loading" >
+                    <form action="add_address" method="post">
+                        {%csrf_token%}
+                    <table  style="width: 800px;">
+                    
+                        <tr>
+                            <th style="padding: 15px; width: 200px;">Name</th>
+                            <td style="width: 400px;">
+                                <input type="text" required style="width: 400px;" class="form-control form-control-sm" placeholder="Name" name="name" aria-label="Name">
+                                   
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="padding: 15px;">House Name</th>
+                            <td> 
+                                <input type="text" required style="width: 400px;" class="form-control form-control-sm" placeholder="House Name" name="housename" aria-label="House Name">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="padding: 15px;">Street Name</th>
+                            <td><input type="text" required style="width: 400px;" class="form-control form-control-sm" placeholder="Street Name" name="streetname" aria-label="Street Name">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th style="padding: 15px;"> Landmark</th>
+                            <td>
+                                <input type="text"  style="width: 400px;" class="form-control form-control-sm" placeholder="Landmark (optional)" name="landmark" aria-label="landmark">
+                                   
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="padding: 15px;"> Pincode</th>
+                            <td>
+                                <input type="text" required style="width: 400px;" class="form-control form-control-sm" placeholder="pincode" name="pincode" aria-label="pincode">
+                                   
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="padding: 15px;"> City</th>
+                            <td>
+                                <input type="text" required style="width: 400px;" class="form-control form-control-sm" placeholder="city" name="city" aria-label="city">
+                                   
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="padding: 15px;"> State</th>
+                            <td>
+                                <input type="text" required style="width: 400px;" class="form-control form-control-sm" placeholder="state" name="state" aria-label="state">
+                                   
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <th style="padding: 15px;"> Country</th>
+                            <td>
+                                <input type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="Country" name="country" aria-label="country" value="India">
+                                   
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <td><button type="submit" class="btn btn-gradient-primary me-2">Submit</button></td>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                </div>
+                   
+            </div>
+
+
+
+
+
+              {%else%}
+              <h5 style="margin-left: 5px;">Address details</h5>
+              {% for items in address%}
+                <div style=" width: 100%; "  data-item-id="{{items.id}}">
+                <br>
+               
+              
+              
+             
+               <div style=" display: flex; border: 1px solid grey;"  id="view-container-{{items.id}}" >
+                <div class="address"  >
+                    <table  style="width: 800px;">
+                    
+                        <tr>
+                         
+                            <td style="width: 90%; padding: 20px;">
+
+                                {{items.name}} <br><br>
+
+                                {{items.house_name}}<br><br>
+                                {{items.street_name}}<br><br>
+                                {{items.city}}<br><br>
+                                {{items.state}} - {{items.pincode}} <br><br>
+                                {%if items.landmark%}
+                                {{items.landmark}}
+                                {%endif%}
+                            
+                            </td>
+                            <td>
+                                <button type="button"   style="border: none; background-color: #ffffff;" class="register-button" data-user-id="{{items.id}}" > <img src="{% static 'images/edit.png'%}"  style="height: 50px; width: 50px;" alt=""></button>
+
+                                {% if count <= 1 %}
+                                {% comment %} No action if count is less than 1 {% endcomment %}
+                              {% else %}
+                                <form action="{%url 'delete_address' items.id %}" method="post"> 
+                                {%csrf_token%}
+                                <button style="border: none; background-color: #ffffff;"> <img src="{% static 'images/trashicon.png'%}" style="height: 50px; width: 50px;" alt=""></button>
+                               </form>
+                               {% endif %}
+                            </td>
+                        </tr> 
+                        
+                    </table>
+                </div>
+              
+            </div>
+
+
+
+                <!--
+                    new div
+                -->
+
+                <form action="{% url 'update_address' items.id %}" method="post">
+                    {%csrf_token%}
+                <div   id="edit-container-{{items.id}}" class="edit-container">
+                    <div class="address"   >
+                        <table  style="width: 800px;">
+                    
+                            <tr>
+                                <th style="padding: 15px; width: 200px;">Name</th>
+                                <td style="width: 400px;">
+                                    <input value="{{items.name}}" type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="Name" name="name" aria-label="Name">
+                                       
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="padding: 15px;">House Name</th>
+                                <td> 
+                                    <input value="{{items.house_name}}" type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="House Name" name="housename" aria-label="House Name">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="padding: 15px;">Street Name</th>
+                                <td><input value="{{items.street_name}}" type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="Street Name" name="streetname" aria-label="Street Name">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th style="padding: 15px;"> Landmark</th>
+                                <td>
+                                    <input value="{{items.landmark}}" type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="Landmark (optional)" name="landmark" aria-label="landmark">
+                                       
+                                </td>
+                            </tr>
+    
+                            <tr>
+                                <th style="padding: 15px;"> Pincode</th>
+                                <td>
+                                    <input value="{{items.pincode}}" type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="pincode" name="pincode" aria-label="pincode">
+                                       
+                                </td>
+                            </tr>
+    
+                            <tr>
+                                <th style="padding: 15px;"> City</th>
+                                <td>
+                                    <input value="{{items.city}}" type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="city" name="city" aria-label="city">
+                                       
+                                </td>
+                            </tr>
+    
+                            <tr>
+                                <th style="padding: 15px;"> State</th>
+                                <td>
+                                    <input value="{{items.state}}" type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="state" name="state" aria-label="state">
+                                       
+                                </td>
+                            </tr>
+    
+                            <tr>
+                                <th style="padding: 15px;"> Country</th>
+                                <td>
+                                    <input value="{{items.country}}" type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="Country" name="country" aria-label="country" value="India">
+                                       
+                                </td>
+                            </tr>
+                            <tr >
+                                <td ></td>
+                                <td>
+                                    <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                                    
+                                        <button  type="button" data-user-id="{{items.id}}" class="btn btn-gradient-primary me-2 cancelbutton">cancel</button>
+                                   
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                        <div class="payment" style="margin-left: 150px;">
+                           
+                        </div>
+                </div>
+            </form>
+  <!--
+                    new div
+                -->
+
+
+              </div>
+              {%endfor%}
+              <div id="view-container123">
+              <button onclick="showEditForm()"  type="button"  class="btn btn-gradient-primary me-2">Add Another Address</button>
+            </div>
+
+            <!--  hiden div-->
+            <div id="edit-container123" class="edit-container123">
+                <form action="add_address" method="post">
+                    {%csrf_token%}
+                <table  style="width: 800px;">
+                
+                    <tr>
+                        <th style="padding: 15px; width: 200px;">Name</th>
+                        <td style="width: 400px;">
+                            <input type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="Name" name="name" aria-label="Name">
+                               
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 15px;">House Name</th>
+                        <td> 
+                            <input type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="House Name" name="housename" aria-label="House Name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 15px;">Street Name</th>
+                        <td><input type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="Street Name" name="streetname" aria-label="Street Name">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 15px;"> Landmark</th>
+                        <td>
+                            <input type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="Landmark (optional)" name="landmark" aria-label="landmark">
+                               
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="padding: 15px;"> Pincode</th>
+                        <td>
+                            <input type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="pincode" name="pincode" aria-label="pincode">
+                               
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="padding: 15px;"> City</th>
+                        <td>
+                            <input type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="city" name="city" aria-label="city">
+                               
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="padding: 15px;"> State</th>
+                        <td>
+                            <input type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="state" name="state" aria-label="state">
+                               
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th style="padding: 15px;"> Country</th>
+                        <td>
+                            <input type="text" style="width: 400px;" class="form-control form-control-sm" placeholder="Country" name="country" aria-label="country" value="India">
+                               
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                            <button type="button" onclick="saveChanges()" class="btn btn-gradient-primary me-2">Cancel</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+
+            </div>              
+             {%endif%}
+          </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ***** Footer Start ***** -->
+<footer >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="first-item">
+                    <div class="logo">
+                        <img src="{% static 'images/fc_logo.png' %}" alt="hexashop ecommerce templatemo">
+                    </div>
+                    <ul>
+                        <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
+                        <li><a href="#">firstcry.com</a></li>
+                        <li><a href="#">010-020-0340</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h4>Shopping &amp; Categories</h4>
+                <ul>
+                    <li><a href="#">Men’s Shopping</a></li>
+                    <li><a href="#">Women’s Shopping</a></li>
+                    <li><a href="#">Kid's Shopping</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Useful Links</h4>
+                <ul>
+                    <li><a href="#">Homepage</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Help &amp; Information</h4>
+                <ul>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">FAQ's</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Tracking ID</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-12">
+                <div class="under-footer">
+                    <p>Copyright © 2022 Firstcry. All Rights Reserved. 
+                    
+                   
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  </footer>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+
+  <script src="{% static 'js/quantity.js' %}"></script>
+  <script src="{% static 'js/adding.js' %}"></script>
+  
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var registerButtons = document.querySelectorAll('.register-button');
+
+        registerButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var userId = this.getAttribute('data-user-id');
+
+                EditForm(userId);
+            });
+        });
+
+        
+        var cancelButtons = document.querySelectorAll('.cancelbutton');
+        cancelButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                var userId = this.getAttribute('data-user-id');
+                console.log(userId)
+
+                closeEditForm(userId);
+                $(" # loading ").load(" # loading");
+            });
+        });
+
+    });
+    
+    function EditForm(userId) {
+        document.getElementById('view-container-'+userId).style.display = 'none';
+        document.getElementById('edit-container-'+userId).style.display = 'block';
+    }
+
+    function closeEditForm(userId) {
+        document.getElementById('view-container-'+userId).style.display = 'block';
+        document.getElementById('edit-container-'+userId).style.display = ' none';
+    }
+   
+</script>
+
+<script>
+    function showEditForm() {
+        document.getElementById('view-container123').style.display = 'none';
+        document.getElementById('edit-container123').style.display = 'block';
+    }
+
+    function saveChanges() {
+        document.getElementById('view-container123').style.display = 'block';
+        document.getElementById('edit-container123').style.display = 'none';
+    }
+</script>
+
+  </body>
+  </html>

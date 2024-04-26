@@ -1,0 +1,149 @@
+#parent{
+    height: 650px;
+}
+
+.big :hover #hover-content{
+    bottom: 30px;
+    opacity: 1;
+    visibility: visible;
+  }
+#parent img{
+    height: 400px; 
+    width: 385px; 
+    padding: 2px; 
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: 0%;
+
+   }
+   .big:hover #parent {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      border: 1px solid #141313;
+      margin-top: -2px;
+      transition: all 0.2s;
+   }
+
+
+   .link-button{
+    width: 45%; 
+   }
+   
+   .link-button2{
+    width: 45%; 
+
+   }
+   .hover-content{
+    
+    margin-bottom: -25px;
+   }
+   .down-content{
+    margin-bottom: -25px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    text-align: left;
+    width: 90%;
+    margin-left: 20px;
+    height: 15%;
+
+   }
+
+   .size-content{
+    overflow: hidden;
+    text-align: left;
+    overflow-wrap: break-word;
+    width: 90%;
+    margin-left: 20px;
+    height: 10%;
+    background-color: rgb(252, 251, 253);
+    line-height: 50%;
+    margin-top: 10px;
+   }
+
+   .size-content button{
+    margin-top: 2px;
+    width: 60px;
+    border-radius: 5px;
+    height: 30px;
+    line-height: 50%;
+    font-size: 12px;
+    border-width: 1px;
+
+   }
+   .color-line{
+    display: inline-flex;
+    margin-top: 10%;
+    background-color: rgb(252, 252, 249);
+    width: 90%;
+    height: 25px;
+   }
+   .line{
+    height: 1px;
+    background-color: #474444;
+    width: 90%;
+    margin-top: 3%;
+    margin-left: 2%;
+   }
+   .color button{
+    height: 25px;
+    width: 25px;
+    border: 0.5px;
+    cursor: default;
+   }
+   .line1{
+    height: 1px;
+    margin-top: 5px;
+    background-color: #bababa;
+    width: 100%;
+ 
+   }
+   
+   .size-chart{
+    overflow: hidden;
+    text-align: left;
+    overflow-wrap: break-word;
+    width: 90%;
+    background-color: rgb(252, 251, 253);
+    margin-top: 10px;
+    height: 20%;
+    margin-top: 10px;
+
+   }
+   
+   .size-chart button{
+    width: 90px;
+    border-radius: 5px;
+    height: 40px;
+    line-height: 50%;
+    font-size: 18px;
+    font-weight: 600;
+    border: 0.2px solid rgb(159, 158, 158);
+    margin-top: 10px;
+    
+    margin-left: 10px;
+
+   }
+   .description h6{
+    margin-top: 10px;
+   }
+   
+   .down-content1{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    left: 15px;
+    bottom: 15px;
+    text-align: center;
+    background-color: rgba(42,42,42,.97);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+   }
+   #parent:hover  .down-content1{
+    opacity: 1px;
+    visibility: visible;
+
+   }
+   .big :hover .down-content1{
+    opacity: 1px;
+    visibility: visible;
+   }

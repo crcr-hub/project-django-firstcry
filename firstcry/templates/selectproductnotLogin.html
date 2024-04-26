@@ -1,0 +1,101 @@
+{% extends 'baseForLoginandRegister.html' %}
+
+
+{% block htmlhead %}
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href=" {% static 'styles/css.css' %}" />
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap.min.css ' %}">
+
+<link rel="stylesheet" type="text/css" href="{% static 'styles/font-awesome.css' %}">
+
+<link rel="stylesheet" href="{% static 'styles/templatemo-hexashop.css' %}">
+
+<link rel="stylesheet" href="{% static 'styles/menubar.css' %}">
+
+<link rel="stylesheet" href="{% static 'styles/new.css' %}">
+
+<link rel="stylesheet" href="{% static 'styles/foruser.css' %}">
+
+<style>
+ 
+
+</style> 
+
+<style> 
+   
+   </style>
+{% endblock htmlhead %} 
+
+{% block content %}
+<section class="section" id="products" style="margin-top: 10%;">
+    <div class="container">
+    <div class="row" style="margin-left: -15%; margin-right: -300px;">
+     
+       
+      {% for p in details %}
+        <div class="col-lg-3 big">
+            <div class="item"  id ="parent" style="display:table-cell; vertical-align:middle; text-align:center; margin-bottom: 2px;" >
+                <div class="thumb product" id="child" data-product-id="{{ p.id }}">
+                  <div class="hover-content" style="width: 100%; ">
+                  <a href="{% url 'user_login' %}" class="link-button"  >ADD TO CART</a>
+                   <a   href="{% url 'user_login' %}"  class="link-button2 " id=" add_to_wishlist" >WISHLIST</a>
+                </div>
+                    {% if p.image %}
+                    <a href="{% url 'select_one' p.id %}" >  <img src="{{p.image.url}}" class="image" alt="" >   </a>
+                     {%endif%}
+                </div>
+         
+                <div class="down-content"  > 
+                    <div style=" height: 50px;"><h6 style="font-size: 15px;">{{p.name}}</h6></div>
+                  <div style="display: flex ; margin-top: 1px;">
+                    <div>
+                        <h6 style="font-size: 18px;">
+                          <i class="fa fa-rupee"  ></i>{{p.Offer_price }}</h6>
+                      </div>
+                      <div style="margin-left: 20px; margin-top: -2px; display: flex;">
+                        <span style="text-decoration: line-through;">
+                          <i class="fa fa-rupee" style="text-decoration: line-through;" ></i>{{p.price}} </span> 
+                          &nbsp;&nbsp; 
+                          <span style="color: red;">({{p.deal}}% Off)</span>
+                        </div> 
+                        <br>
+                
+                    </div>
+                </div>
+                <div class="color-line" >
+                    <div class="color" ><button class="color-button" data-id="{{ p.varient.colors.code }}" ></button>
+                      
+    
+                    </div>
+                    <div class="line"></div>
+                    
+                  </div>
+                </div>
+            </div>
+            {% endfor %}
+      
+        
+        &nbsp;&nbsp;&nbsp; 
+    </div>
+    </div>
+    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const buttons = document.querySelectorAll('.color-button');
+          buttons.forEach(button => {
+              const color = button.dataset.id;
+              console.log(color)
+              button.style.backgroundColor = color;
+            });
+        });
+    </script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'js/adding.js' %}"></script>
+
+    {% endblock %}
+
+    <!-- HTML !-->
+

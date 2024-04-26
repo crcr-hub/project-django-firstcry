@@ -1,0 +1,684 @@
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatic Carousel</title>
+
+  <link rel="stylesheet" type="text/css" href=" {% static 'styles/css.css' %}" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap.min.css ' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/font-awesome.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/templatemo-hexashop.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/menubar.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/new.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/foruser.css' %}">
+
+  <link rel="stylesheet" href="{% static 'adminstyle2/css/style.css' %}">
+  <!-- End layout styles -->
+  <link rel="shortcut icon" href="{% static 'adminstyle2/images/favicon.ico' %}" />
+
+  <link rel="stylesheet" href="{% static 'styles/inputnumber.css.css' %}">
+
+
+
+
+<style>
+
+.price td{
+padding-top: 10px;
+font-weight: 500;
+}
+
+   #menu1234 {
+
+    background-color: #ffffff;
+    color: rgb(16, 16, 16);
+    padding: 20px;
+}
+
+#data {
+    flex: 1;
+    padding: 20px;
+}
+
+#menu1234 a {
+    text-decoration: none;
+    color: rgb(10, 10, 10);
+    display: block;
+    margin-bottom: 10px;
+    font-size: 15px;
+    height: 35px;
+    border-top: 5px solid #fefcfc; /* Initially set the top border */
+    transition: border-top-color 0.3s; /* Transition for a smooth effect */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#menu1234 a:hover {
+    background-color: #c6c5c5;
+    border-top-color: #c6c5c5; /* Change the top border color on hover */
+}
+#menu1234 a span{
+    margin-left: 20px;
+}
+body {
+  background-color: rgb(239, 234, 234);
+}
+#images {
+  flex-grow: 1; /* This makes the images div take up the remaining space */
+  display: block;
+  flex-wrap: wrap; /* Allow images to wrap to the next line */
+  justify-content: space-between; /* Adjust the spacing between columns */
+  padding: 20px;
+}
+
+#images img {
+  width: 100%; /* Adjust the width of each image, accounting for spacing */
+  margin-bottom: 20px; /* Add some spacing between images */
+  box-sizing: border-box; /* Include padding and border in the width */
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 600px; /* Adjust the width as needed */
+  background-color: #f1f1f1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.popup-content {
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+button {
+  margin-top: 10px;
+}
+</style>
+</head>
+<body>
+<header>
+
+  <div >
+    <div class="mainlogo"><img src="{% static 'images/fc_logo.png' %}" alt="">  
+                    <div class="about">
+                        
+                        <ul>
+
+                          <li><a href="{% url 'userhome'%}">Home | </a></li>
+                          <li><a href="{% url 'useraccount'%}">Account </a><span>|</span></li>
+                            <li><a href="{% url 'wishlist' %}">Wishlist </a><span>|</span></li>
+                            <li><a href="{% url 'cart' %}">Cart</a></li>
+            
+                        </ul>
+                    </div>
+        </div>
+    </div>   
+
+    <!-- ***** Header Area End ***** -->
+
+  <!-- navmenu -->
+
+
+</header>
+<div style="width: 100%; height: 100px;">
+
+</div>
+
+<!-- End of the navmenu-->
+
+
+
+  <!-- partial:partials/_sidebar.html -->
+  
+
+
+
+    <div class="container main"  id="main"  >
+    <div style="display: flex; background-color: #ffffff;" >
+
+       
+            <div id="images" style="background-color: #ffffff;; margin-left: 50px;  box-shadow: 2px 2px 5px;" >
+              <!-- Your images go here -->
+
+
+              {% if start %}
+            
+              <div>
+                  <h2>Your Cart Is Empty</h2>
+              </div>
+  
+  
+  
+              {%else%}
+              <div style="height: 40px; border-bottom: 2px solid rgb(99, 18, 18); border-right: 2px solid rgb(99, 18, 18); width: 250px;"> <h3 style=" margin-left: 10px;  " >Shopping Cart </h3></div>
+                
+           
+
+
+                <div  style="height: 180px;width: 100%; display: flex; border-radius: 10px; background-color:rgb(239, 234, 234);">
+                    <div style="padding: 25px;">
+                        {{address.name}} <br>
+                        {{address.house_name}} <br>
+                        {{address.street_name}} <br>
+                        {{address.city}} <br>
+                        {{address.state}}
+                        {{address.pincode}}
+                    </div>
+                    <div>
+                      <button style="margin-left: 200px;" id="addAddressBtn" type="button" class="btn btn-gradient-primary me-2">Change Address</button>
+
+                       <div id="popup" class="popup">
+                        <button onclick="closePopup()" style="border: none;">X</button>
+                        <br>
+                        {% for items in alladdress %}
+                        {% if items.default_value %}
+                          <div class="popup-content"  style="border: 1px solid rgb(163, 4, 4); box-shadow: 0 0 5px rgb(163, 4, 4);  padding: 25px; ">
+                            {%else%}
+                            <div class="popup-content"  style="border: 1px solid rgb(3, 3, 3); padding: 25px; ">
+                              {%endif%}
+                               <!-- Add your address form or content here -->
+                               {{items.name}} <br>
+                               {{items.house_name}} <br>
+                               {{items.street_name}} <br>
+                               {{items.city}} <br>
+                               {{items.state}}
+                               {{items.pincode}}
+                               {%if items.default_value == False %}
+                              <a href="{% url 'make_default' items.id %}">
+                                <button style="margin-left: 200px;"  type="button" class="btn btn-gradient-primary me-2">Use</button>
+                              </a> 
+                              {%endif%}
+
+
+                              
+                              
+                           </div>
+                          
+                           <br>
+                           {%endfor%}
+                       </div>
+                    
+                    
+                    
+                      </div>
+
+
+                    
+
+
+               
+
+                </div>
+                {% for item in cart_items %}
+              <div style="height: 300px; width: 100%;">
+                <div style="height: 250px; display: flex; width: 100%; ">
+                  <div data-item-id="{{ item.id }}"  style="margin-top: 10px;  display: flex; height: 260px; width: 100%; border: 1px solid grey; border-bottom: 0px;">
+                    {% if item.product.image%}
+                    <a href="{% url 'selectoneproduct' item.product.id %}?size={{item.size}}" data-size="{{item.size}}">  <img src="{{item.product.image}}" style="width: 200px; height: 210px; display: block; margin-top: 10px; margin-left: 10px;" alt="Image 1">
+                   </a> {% endif %}
+                                <div style=" margin-left: 50px; height: 150px; width: 100%; margin-top: 10px; display: flex;">
+                                    <div class="model" style=" margin-top: 30px;  width: 70%; height: 100%;">
+                                    <h5 style="font-size: 20px;">{{item.product.name}}</h5>
+                                    
+                         
+                                <h4 style="margin-top: 2px;">Description  : {{item.product.description}}</h4>
+                                <h4  style="margin-top: 2px;"> Size   :
+                                    {% if item.size == "zerotothreeM" %}
+                                    0 - 3 M
+                                    {%elif item.size == "threetosixM" %}
+                                    3 - 6 M
+                                    {% elif item.size == "sixtonineM"%}
+                                    6 - 9 M
+                                    {% elif item.size == "ninetotwelveM"%}
+                                    9 - 12 M
+                                    {% elif item.size == "twelvetoeighteenM"%}
+                                    12 - 18 M
+                                    {% elif item.size == "eighteentotwentyfourM"%}
+                                    18 - 24 M
+                                    {% elif item.size == "twotofourY"%}
+                                    2 - 4 Y
+                                    {% elif item.size == "fourtosixY"%}
+                                    4 - 6 Y
+                                    {% elif item.size == "sixtoeightY"%}
+                                    6 - 8 Y
+                                    {%endif%}
+                                </h4>
+                                
+                            </div>
+                            {% with size=item.size %}
+                        
+                            {% if item.product.varient|get_attribute:size > 0 %}
+                            <input type="text" id ="size" value="{{item.size}}" hidden>
+                           
+                                <div style="width: 30%; padding-left: 10px; height: 210px; border-left: solid 2px grey; " >
+                                    <table class="price">
+                                        <tr>
+                                            <td >MRP</td>
+                                            <td style="padding-left: 35px;">:
+                                                <i class="fa fa-rupee " ></i>
+                                                {{item.product.price}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Offer Price</td>
+                                            <td style="padding-left: 35px;">: <i class="fa fa-rupee " ></i>{{item.product.Offer_price}} </td>
+                                        </tr>
+                                        <tr>
+                                            <td><label for=""> Qnty  :</label></td>
+                                            <td style="padding-left: 35px;"><input type="number" id="typeNumber" value="{{item.quantity}}" class="form-control quantity-input" style="width: 80px; display: inline-block;"  min="1" max="{{item.product.varient|get_attribute:size}}" data-item-id="{{ item.id }}">
+                                            
+                                            </td>
+                                        
+                                        </tr>
+                                        <tr data-item-id="{{ item.id }}">
+                                            <td>Total Price</td>
+                                            <td class="total-amount" style=" font-weight: bold;padding-left: 35px;">
+                                                <i class="fa fa-rupee " ></i>{{ item.product.Offer_price|multiply:item.quantity }}</td>
+                                      
+                                        </tr>
+                                    </table>
+                                    
+                                      
+                                </div>
+                                {%else%}
+                                <div  style="width: 30%; padding-left: 10px; height: 210px; border-left: solid 2px grey; ">
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <h6 style="color: rgb(150, 4, 4)(0, 255, 89);">{{message}}</h6>
+                                    {% endfor %}
+                                    {%else%}
+                                    Product out of Stock
+                                    {%endif%}
+                                </div>
+                                {%endif%}
+                                {% endwith %}
+                            </div>
+                           
+                           
+                  </div>
+                  
+                </div>
+                <div style="height: 60px;width: 100%; display: flex; ">
+                    <div style="height: 80px;width: 100%; display: flex; border: 1px solid grey; ">
+                       <table>
+                        <tr data-items-id="{{ item.id }}">
+                            <td style=" width: 250px; align-items: center; padding-left: 50px; padding-bottom: 10px; height: 80px; " colspan="2">
+                                {% with size=item.size %}
+                                {% if item.product.varient|get_attribute:size > 0 %}
+                                <a style="width: 200px;"  class="link-button2 remove-item" data-items-id="{{ item.id }}" > REMOVE</a>
+                                {%else%}
+                                {% if messages %}
+                                    {% for message in messages %}
+                                    <h6 style="color: rgb(150, 4, 4)(0, 255, 89);" hidden>{{message}}</h6>
+                                    <a style="width: 200px; border: 1px solid red;"  class="link-button2 remove-item" data-items-id="{{ item.id }}" > REMOVE</a>
+                           
+                                    {% endfor %}
+                                    {%else%}
+                                    <a style="width: 200px;"  class="link-button2 remove-item" data-items-id="{{ item.id }}" > REMOVE</a>
+                           
+                                    {%endif%}
+                                {%endif%}
+                                {%endwith%}
+                                 </td>
+                         
+                            </tr>
+                           
+                       </table>
+                    </div>
+                   
+                </div>
+              </div>
+              <br><br>
+              {%endfor%}
+            
+              <div style=" height:180px; ">
+                <br>
+               
+               <div style=" display: flex;">
+                    <div class="address">
+                         
+                    </div>
+
+
+
+
+
+
+                    <div class="payment" style="margin-top: 50px; border: 1px solid grey; height: 80px;width: 100%; ">
+                        <table style="margin-left: 60%;">
+                            <tr data-item-id="{{ item.id }}">
+                                <td style="height: 50px; width: 250px;"><strong>Total</strong></td>
+                                <td id="" style="width: 300px; ">
+                                    <a href="confirm_order"  class="link-button  " data-item-id="{{ item.id }}" id="total-amount" style="width: 300px; height: 70px;  text-align: left;" >
+                                        
+                                        <strong>PLACE <br> ORDER&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;
+                                            <i class="fa fa-rupee " ></i><label for="" id="amount">{{ total_amount }} </label></strong></a>
+                                    </td>
+                            </tr>
+                        </table>
+                    
+                    </div>
+               </div>
+              </div>
+            
+             
+          </div>
+          {%endif%}
+
+        
+        </div>
+
+
+
+       
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ***** Footer Start ***** -->
+<footer >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="first-item">
+                    <div class="logo">
+                        <img src="{% static 'images/fc_logo.png' %}" alt="hexashop ecommerce templatemo">
+                    </div>
+                    <ul>
+                        <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
+                        <li><a href="#">firstcry.com</a></li>
+                        <li><a href="#">010-020-0340</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h4>Shopping &amp; Categories</h4>
+                <ul>
+                    <li><a href="#">Men’s Shopping</a></li>
+                    <li><a href="#">Women’s Shopping</a></li>
+                    <li><a href="#">Kid's Shopping</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Useful Links</h4>
+                <ul>
+                    <li><a href="#">Homepage</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Help &amp; Information</h4>
+                <ul>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">FAQ's</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Tracking ID</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-12">
+                <div class="under-footer">
+                    <p>Copyright © 2022 Firstcry. All Rights Reserved. 
+                    
+                   
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  </footer>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+
+  <script src="{% static 'js/quantity.js' %}"></script>
+
+ <script src="{% static 'js/forpopup.js' %}"></script>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            $(document).ready(function () {
+                // Attach a change event to the quantity inputs
+                $('.quantity-input').change(function () {
+                    var itemId = $(this).data('item-id');
+                    console.log("thishis",itemId)
+                    var newQuantity = $(this).val();
+                    console.log("tjishshhshhsh",newQuantity)
+    
+                    // Send an AJAX request to update the quantity
+                    updateCartItem(itemId, newQuantity);
+                 
+                    $(" # main ").load(" # main");
+                 
+                   
+                });
+    
+                // Attach a click event to the remove-item buttons
+              //  $('.remove-item').click(function () {
+                //    var itemId = $(this).data('items-id');
+                 //   console.log("itemid",itemId)
+                    
+                    // Send an AJAX request to remove the item
+                 //   removeCartItem(itemId);
+                 //   $(" .main").load(location.href + " .main")
+                      
+                  
+             //   });
+            });
+    
+            function updateCartItem(itemId, newQuantity) {
+                var csrftoken = getCookie('csrftoken');
+                var size = $('#size').val()
+                console.log(size)
+    
+                $.ajax({
+                    url: '/update-item/' + itemId + '/',
+                    type: 'POST',
+                    data: {
+                        csrfmiddlewaretoken: csrftoken,
+                        'quantity': newQuantity,'size':size,
+                    },
+                    success: function (data) {
+                        // Update the total amount on the page
+                        console.log("this data",data)
+                       // $('#total-amount').html('<strong>'+'PLACE'+'<br>'+' ORDER'+'&nbsp;&nbsp;&nbsp;&nbsp;'+ data.total_amount + '</strong>');
+                       $('#amount').text(data.total_amount);
+                        // Update the total amount for the specific item
+                        var totalAmountCell = $('tr[data-item-id="' + itemId + '"] .total-amount');
+                        totalAmountCell.text( data.item_total_amount);
+                       
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+    
+            function removeCartItem(itemId) {
+                var csrftoken = getCookie('csrftoken');
+    
+                $.ajax({
+                    url: '/remove-item/' + itemId + '/',
+                    type: 'POST',
+                    data: {
+                        csrfmiddlewaretoken: csrftoken
+                    },
+                    success: function (data) {
+
+                        // Update the total amount on the page
+                        $('#total-amount').html('<strong>$' + data.total_amount + '</strong>');
+    
+                        // Remove the corresponding row from the table
+                     
+                        $('tr[data-items-id="' + itemId + '"]').remove();
+  
+                   
+                        console.log("success");
+
+
+                        //$("#main").load(" #main");
+                        
+                    
+                      
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+    </script>
+
+<script>
+    $("[type='number']").keypress(function (evt) {
+        evt.preventDefault();
+    });
+</script>
+
+
+<script>
+
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+
+    function initializeCart() {
+        var csrftoken = getCookie('csrftoken');
+      // Place your cart-related JavaScript initialization logic here
+      $(".remove-item").on("click", function() {
+
+            var itemId = $(this).data('items-id');
+            console.log("itemid",itemId)
+  
+        // AJAX request to Django view for removing from cart
+        $.ajax({
+          type: "POST",
+          url:  '/remove-item/' + itemId + '/',  // Replace with your Django view URL
+          data: {csrfmiddlewaretoken: csrftoken },
+          success: function(data) {
+          
+              // Reload the content of the #cart div
+              $("#main").load(" #main", function() {
+                // Reinitialize or rebind your JavaScript logic after the reload
+                initializeCart();
+              });
+  
+              // Additional logic after successful removal
+              console.log("Item removed from the cart");
+     
+          },
+          error: function(error) {
+            console.error("Error removing item from the cart:", error);
+          }
+        });
+      });
+
+
+
+        // Attach a change event to the quantity inputs
+        $('.quantity-input').change(function () {
+            var itemId = $(this).data('item-id');
+            console.log("thishis",itemId)
+            var newQuantity = $(this).val();
+
+            // Send an AJAX request to update the quantity
+            updateCartItem(itemId, newQuantity);
+         
+            $(" # main ").load(" # main");
+         
+           
+        });
+
+
+        const addAddressBtn = document.getElementById('addAddressBtn');
+        const popup = document.getElementById('popup');
+        
+        addAddressBtn.addEventListener('click', () => {
+            openPopup();
+        });
+        
+        function openPopup() {
+            popup.style.display = 'block';
+        }
+        
+        function closePopup() {
+            popup.style.display = 'none';
+        }
+
+    }
+  
+    // Initial call to initializeCart
+    initializeCart();
+  </script>
+  
+
+
+  
+  </body>
+  </html>

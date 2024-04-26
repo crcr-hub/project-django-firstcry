@@ -1,0 +1,171 @@
+
+
+  #carousel123-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 40px;
+    height: 400px;
+  }
+
+  #carousel123 {
+    display: flex;
+    transition: transform 1s ease-in-out;
+    align-items: center;
+  }
+  
+  #carousel123 img{
+    height: 500px;
+    width: 100%;
+
+  }
+
+  .carousel123-item {
+    min-width: 100%;
+    box-sizing: border-box;
+    
+  }
+  #prevBtn, #nextBtn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      cursor: pointer;
+      background-color: rgb(213, 213, 217);
+      padding: 10px;
+      border-radius: 45%;
+      
+    }
+
+    #prevBtn {
+      left: 50px;
+    }
+
+    #nextBtn {
+      right: 50px;
+    }
+
+    #carousel123-container {
+      display: block; /* Set the default display property for the carousel */
+  }
+
+
+#prevBtn:hover, #nextBtn:hover {
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    
+}
+  
+  /* Define a media query to hide the carousel on smaller screens */
+  @media screen and (max-width: 914px) {
+      #carousel123-container {
+          display: none;
+      }
+  }
+
+
+
+  /* for button
+  
+/* CSS */
+.button-85 {
+  padding: 0.6em 2em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-85:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.button-85:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+
+
+/* CSS */
+.button-87 {
+  margin: 10px;
+  padding: 10px 25px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+
+  background-size: 200% auto;
+  color: white;
+  border-radius: 10px;
+  display: block;
+  border: 0px;
+  font-weight: 500;
+  box-shadow: 0px 0px 14px -7px #f09819;
+  background-image: linear-gradient(45deg, #FF512F 0%, #F09819  51%, #FF512F  100%);
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-87:hover {
+  background-position: right center;
+  /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
+}
+
+.button-87:active {
+  transform: scale(0.95);
+}

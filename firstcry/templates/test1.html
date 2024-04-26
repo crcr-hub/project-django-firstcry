@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="product-form" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" id="image-upload" name="image">
+        <div id="image-preview"></div>
+        <!-- Other product fields -->
+        <button type="submit">Submit</button>
+    </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var imageUpload = document.getElementById('image-upload');
+            var imagePreview = document.getElementById('image-preview');
+        
+            imageUpload.addEventListener('change', function() {
+                var file = this.files[0];
+                var reader = new FileReader();
+        
+                reader.onload = function(e) {
+                    // Display uploaded image in preview area
+                    imagePreview.innerHTML = '<img id="cropper-image" src="' + e.target.result + '">';
+                    
+                    // Initialize image cropper
+                    var cropper = new Cropper(document.getElementById('cropper-image'), {
+                        aspectRatio: 1, // Set aspect ratio if needed
+                        // Configure other options as required
+                    });
+        
+                    // Handle crop button click
+                    document.getElementById('crop-button').addEventListener('click', function() {
+                        // Get cropped image data
+                        var croppedImageData = cropper.getCroppedCanvas().toDataURL('image/jpeg');
+        
+                        // Append cropped image data to form as hidden input
+                        var hiddenInput = document.createElement('input');
+                        hiddenInput.type = 'hidden';
+                        hiddenInput.name = 'cropped_image';
+                        hiddenInput.value = croppedImageData;
+                        document.getElementById('product-form').appendChild(hiddenInput);
+        
+                        // Submit form
+                        document.getElementById('product-form').submit();
+                    });
+                };
+        
+                reader.readAsDataURL(file);
+            });
+        });
+        
+    </script>
+</body>
+</html>

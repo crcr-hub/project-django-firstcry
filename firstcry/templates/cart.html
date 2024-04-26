@@ -1,0 +1,378 @@
+
+{% load static %}
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatic Carousel</title>
+
+  <link rel="stylesheet" type="text/css" href=" {% static 'styles/css.css' %}" />
+
+
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap.min.css ' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/font-awesome.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/templatemo-hexashop.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/menubar.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/new.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/foruser.css' %}">
+  <link rel="stylesheet" href="{% static 'styles/inputnumber.css.css' %}">
+
+</head>
+<body>
+<header>
+
+  <div >
+    <div class="mainlogo"><img src="{% static 'images/fc_logo.png' %}" alt="">  
+                    <div class="about">
+                        
+                        <ul>
+
+                          <li><a href="{% url 'user_login'%}">Logout | </a></li>
+                          <li><a href="{% url 'useraccount'%}">Account </a><span>|</span></li>
+                            <li><a href="{% url 'wishlist' %}">Wishlist </a><span>|</span></li>
+                            <li><a href="">Cart</a></li>
+            
+                        </ul>
+                    </div>
+        </div>
+    </div>   
+
+    <!-- ***** Header Area End ***** -->
+
+  <!-- navmenu -->
+    <nav >
+        <div class="wrapper">
+          <input type="radio" name="slider" id="menu-btn">
+          <input type="radio" name="slider" id="close-btn">
+          <ul class="nav-links">
+            <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+            <li><a href="{% url 'userhome' %}">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li>
+              <a href="#" class="desktop-item">Dropdown Menu</a>
+              <input type="checkbox" id="showDrop">
+              <label for="showDrop" class="mobile-item">Dropdown Menu</label>
+              <ul class="drop-menu">
+                <li><a href="#">Drop menu 1</a></li>
+                <li><a href="#">Drop menu 2</a></li>
+                <li><a href="#">Drop menu 3</a></li>
+                <li><a href="#">Drop menu 4</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="desktop-item">Mega Menu</a>
+              <input type="checkbox" id="showMega">
+              <label for="showMega" class="mobile-item">Mega Menu</label>
+              <div class="mega-box">
+                <div class="content">
+                  <div class="row">
+                
+                  </div>
+                  <div class="row">
+                    <header>Design Services</header>
+                    <ul class="mega-links">
+                      <li><a href="#">Graphics</a></li>
+                      <li><a href="#">Vectors</a></li>
+                      <li><a href="#">Business cards</a></li>
+                      <li><a href="#">Custom logo</a></li>
+                    </ul>
+                  </div>
+                  <div class="row">
+                    <header>Email Services</header>
+                    <ul class="mega-links">
+                      <li><a href="#">Personal Email</a></li>
+                      <li><a href="#">Business Email</a></li>
+                      <li><a href="#">Mobile Email</a></li>
+                      <li><a href="#">Web Marketing</a></li>
+                    </ul>
+                  </div>
+                  <div class="row">
+                    <header>Security services</header>
+                    <ul class="mega-links">
+                      <li><a href="#">Site Seal</a></li>
+                      <li><a href="#">VPS Hosting</a></li>
+                      <li><a href="#">Privacy Seal</a></li>
+                      <li><a href="#">Website design</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li><a href="#">Feedback</a></li>
+          </ul>
+          <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+        </div>
+      </nav>
+
+</header>
+<div style="width: 100%; height: 50px;">
+
+</div>
+
+<!-- End of the navmenu-->
+
+
+
+<section class="section" id="product" >
+
+    <div class="row main" id="main" >
+        <div class="col-lg-10" style=" margin-left: 300px;">
+<h1>Your Cart</h1>
+
+    <table class="maintable">
+ 
+        <tbody>
+            <tr>
+                <td colspan="4" style="padding-bottom: 10px;"><div style="border: .5px solid black;">
+
+
+                    <textarea class="form-control" placeholder="" id="Address For Billing" style="height: 150px;" name="address" >
+                    </textarea>
+
+                </div> </td>
+            </tr>
+            {% for item in cart_items %}
+                <tr data-item-id="{{ item.id }}">
+                    {%if item.product.image %}
+                    <td style="height: 300px; width: 300px; border-bottom: 1px solid black;border-top: 1px solid black;">
+                         <img src="{{item.product.image.url}}" style="height: 250px; width: 250px;" alt="">
+                       
+                    </td>
+                    {%endif%}
+                    
+                    <td style="width: 400px; padding-right: 100px;border-bottom: 1px solid black;border-top: 1px solid black; ">{{ item.product.name }}</td>
+                    <td style="width: 200px;border-left: 1px solid black; padding-left: 10px;border-top: 1px solid black;"> 
+                        <div class="form-outline">
+                            <b>  MRP  : &nbsp;&nbsp; {{item.product.price}} <br>
+                                Offer Price :   &nbsp;&nbsp; {{item.product.Offer_price}}</b><br>
+                           <label for=""> Qnty  :</label><input type="number" id="typeNumber" value="{{item.quantity}}" class="form-control quantity-input" style="width: 80px; display: inline-block;"  min="1" max="{{item.product.qnty}}" data-item-id="{{ item.id }}">
+                           
+                        </div>
+                    </td>
+                    <td style="padding-right: 100px;border-top: 1px solid black;">
+
+                    </td>
+                    <td class="total-amount" style="border-top: 1px solid black;"><b>{{ item.product.Offer_price|multiply:item.quantity }}</b></td>
+                </tr>
+                <tr data-item-id="{{ item.id }}">
+                    <td style="align-items: center; padding-left: 50px;padding-bottom: -10px; height: 80px;border-bottom: 1px solid black; " colspan="2">
+                        <a   class="link-button2 remove-item" data-item-id="{{ item.id }}" id=" " > REMOVE</a>
+                    </td>
+                 
+                    
+                    <td colspan="3" style="align-items: center; padding-left: 50px; height: 80px;border-bottom: 1px solid black;border-left: 1px solid black; "></td>
+                    <td></td>
+                </tr>
+            {% endfor %}
+            <tr>
+              <div class="">
+                <td colspan="3">Select Payment Method <a   class="link-button2"  style="width: 300px;text-align: left;" >
+                        CHANGE
+                  </a>
+                </td></td>
+                
+                <td style="height: 50px;"><strong>Total</strong></td>
+                <td id="" style="width: 300px; ">
+                    <a href="{% url 'order' %}"  class="link-button remove-item" data-item-id="{{ item.id }}" id="total-amount" style="width: 300px;text-align: left;" >
+                        
+                        <strong>PLACE <br> ORDER&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;{{ total_amount }}</strong></a>
+                    </td>
+                <td></td>
+            </div>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</section>
+
+
+<!-- ***** Footer Start ***** -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="first-item">
+                    <div class="logo">
+                        <img src="{% static 'images/fc_logo.png' %}" alt="hexashop ecommerce templatemo">
+                    </div>
+                    <ul>
+                        <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
+                        <li><a href="#">firstcry.com</a></li>
+                        <li><a href="#">010-020-0340</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h4>Shopping &amp; Categories</h4>
+                <ul>
+                    <li><a href="#">Men’s Shopping</a></li>
+                    <li><a href="#">Women’s Shopping</a></li>
+                    <li><a href="#">Kid's Shopping</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Useful Links</h4>
+                <ul>
+                    <li><a href="#">Homepage</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Help &amp; Information</h4>
+                <ul>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">FAQ's</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Tracking ID</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-12">
+                <div class="under-footer">
+                    <p>Copyright © 2022 Firstcry. All Rights Reserved. 
+                    
+                   
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  </footer>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+
+  <script src="{% static 'js/quantity.js' %}"></script>
+  <script src="{% static 'js/adding.js' %}"></script>
+
+  
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+      
+
+
+
+
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = jQuery.trim(cookies[i]);
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            $(document).ready(function () {
+                // Attach a change event to the quantity inputs
+                $('.quantity-input').change(function () {
+                    var itemId = $(this).data('item-id');
+                    var newQuantity = $(this).val();
+    
+                    // Send an AJAX request to update the quantity
+                    updateCartItem(itemId, newQuantity);
+                    $(" # main ").load(" # main");
+                   
+                });
+    
+                // Attach a click event to the remove-item buttons
+                $('.remove-item').click(function () {
+                    var itemId = $(this).data('item-id');
+                    console.log("itemid",itemId)
+                    
+                    // Send an AJAX request to remove the item
+                    removeCartItem(itemId);
+                  
+                });
+            });
+    
+            function updateCartItem(itemId, newQuantity) {
+                var csrftoken = getCookie('csrftoken');
+    
+                $.ajax({
+                    url: '/update-item/' + itemId + '/',
+                    type: 'POST',
+                    data: {
+                        csrfmiddlewaretoken: csrftoken,
+                        quantity: newQuantity
+                    },
+                    success: function (data) {
+                        // Update the total amount on the page
+                        console.log("this",data)
+                        $('#total-amount').html('<strong>'+'PLACE'+'<br>'+' ORDER'+'&nbsp;&nbsp;&nbsp;&nbsp;'+ data.total_amount + '</strong>');
+    
+                        // Update the total amount for the specific item
+                        var totalAmountCell = $('tr[data-item-id="' + itemId + '"] .total-amount');
+                        totalAmountCell.text('$' + data.item_total_amount);
+                       
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+    
+            function removeCartItem(itemId) {
+                var csrftoken = getCookie('csrftoken');
+    
+                $.ajax({
+                    url: '/remove-item/' + itemId + '/',
+                    type: 'POST',
+                    data: {
+                        csrfmiddlewaretoken: csrftoken
+                    },
+                    success: function (data) {
+                        // Update the total amount on the page
+                        $('#total-amount').html('<strong>$' + data.total_amount + '</strong>');
+    
+                        // Remove the corresponding row from the table
+                        $('tr[data-item-id="' + itemId + '"]').remove();
+                       
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+    </script>
+
+<script>
+    $("[type='number']").keypress(function (evt) {
+        evt.preventDefault();
+    });
+</script>
+
+
+  
+  </body>
+  </html>

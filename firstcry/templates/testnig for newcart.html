@@ -1,0 +1,102 @@
+<!-- cart_page.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Page</title>
+</head>
+<body>
+    <h1>Your Cart</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+                <tr data-item-id="{{ item.id }}">
+                    <td>{{ item.product.name }}</td>
+                    <td>${{ item.product.price }}</td>
+                    <td>
+                        <input type="number" class="quantity-input" value="{{ item.quantity }}" min="1" data-item-id="{{ item.id }}">
+                    </td>
+                    <td class="total-amount">${{ item.product.price|mul:item.quantity }}</td>
+                    <td>
+                        <button class="remove-item" data-item-id="{{ item.id }}">Remove</button>
+                    </td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3"><strong>Total</strong></td>
+                <td id="total-amount"><strong>${{ total_amount }}</strong></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Attach a change event to the quantity inputs
+            $('.quantity-input').change(function () {
+                var itemId = $(this).data('item-id');
+                var newQuantity = $(this).val();
+
+                // Send an AJAX request to update the quantity
+                updateCartItem(itemId, newQuantity);
+            });
+
+            // Attach a click event to the remove-item buttons
+            $('.remove-item').click(function () {
+                var itemId = $(this).data('item-id');
+
+                // Send an AJAX request to remove the item
+                removeCartItem(itemId);
+            });
+        });
+
+        function updateCartItem(itemId, newQuantity) {
+            $.ajax({
+                url: '/update-item/' + itemId + '/',
+                type: 'POST',
+                data: { quantity: newQuantity },
+                success: function (data) {
+                    // Update the total amount on the page
+                    $('#total-amount').html('<strong>$' + data.total_amount + '</strong>');
+
+                    // Update the total amount for the specific item
+                    var totalAmountCell = $('tr[data-item-id="' + itemId + '"] .total-amount');
+                    totalAmountCell.text('$' + data.item_total_amount);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function removeCartItem(itemId) {
+            $.ajax({
+                url: '/remove-item/' + itemId + '/',
+                type: 'POST',
+                success: function (data) {
+                    // Update the total amount on the page
+                    $('#total-amount').html('<strong>$' + data.total_amount + '</strong>');
+
+                    // Remove the corresponding row from the table
+                    $('tr[data-item-id="' + itemId + '"]').remove();
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

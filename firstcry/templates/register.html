@@ -1,0 +1,67 @@
+
+{% extends 'baseForLoginandRegister.html' %}
+
+{% block htmlhead %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/registercss.css' %}">    
+
+{% endblock htmlhead %} 
+
+{% block content %}
+
+
+<div style="height: 100%; width: 50%; margin-top: 100px; margin-left: 50px;">
+
+
+        <div class="container1">
+            <div class="title">Registration</div>
+  
+              
+            <div class="content1">
+              <form action="registration" method="post">
+                {% csrf_token %}
+                <div class="user-details1">
+                  <div class="input-box1">
+                  
+                    
+                    <span class="details1">First Name </span>
+                    <input type="text" placeholder="Enter your First name" required name="firstname">
+                  </div>
+                  <div class="input-box1">
+                    <span class="details1">Last Name</span>
+                    <input type="text" placeholder="Enter your Last name" required name="lastname">
+                  </div>
+                  <div class="input-box1">
+                    <span class="details1">Email</span>
+                    <input type="text" placeholder="{{email}}" required name="email" value="{{email}}" readonly="readonly">
+                  </div>
+                  <div class="input-box1">
+                    <span class="details1">Phone Number</span>
+                    <input type="text" placeholder="Enter your number" required name="phonenumber">
+                  </div>
+                  <div class="input-box1">
+                    <span class="details1">Password</span>
+                    <input type="password" placeholder="Enter your password" required name="password1">
+                  </div>
+                  <div class="input-box1">
+                    <span class="details1">Confirm Password</span>
+                    <input type="password" placeholder="Confirm your password" required name="password2">
+                  </div>
+                </div>
+          
+                <div style="margin-left: 200px;">
+                  {% for message in messages %}
+                  <h6 style="color: red;">{{message}}</h6>
+                  {% endfor %}
+               </div>
+             <div style="margin-left: 200px; width: 400px;"> 
+              <button class="button-87" style="width: 200px;" type="submit" >Register</button>
+                </div>
+            
+            </div>
+          </div>
+
+ 
+</div>
+
+    {% endblock %}

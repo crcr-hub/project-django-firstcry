@@ -1,0 +1,422 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatic Carousel</title>
+
+  <link rel="stylesheet" type="text/css" href=" {% static 'styles/css.css' %}" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap.min.css ' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/font-awesome.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/templatemo-hexashop.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/menubar.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/new.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/foruser.css' %}">
+
+</head>
+<body>
+<header>
+
+  <div >
+    <div class="mainlogo"><img src="{% static 'images/fc_logo.png' %}" alt="">  
+                    <div class="about">
+                        
+                        <ul>
+
+                          <li><a href="{% url 'logout'%}">Logout | </a></li>
+                          <li><a href="{% url 'useraccount' %}">Account </a><span>|</span></li>
+                            <li><a href="{% url 'wishlist' %}">Wishlist </a><span>|</span></li>
+                            <li><a href="{% url 'cart' %}">Cart</a></li>
+            
+                        </ul>
+                    </div>
+        </div>
+    </div>   
+
+    <!-- ***** Header Area End ***** -->
+
+  <!-- navmenu -->
+    <nav >
+        <div class="wrapper">
+          <input type="radio" name="slider" id="menu-btn">
+          <input type="radio" name="slider" id="close-btn">
+          <ul class="nav-links">
+            <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+            <li><a href="{% url 'userhome' %}">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li>
+              <a href="#" class="desktop-item">Boys Fashion</a>
+              <input type="checkbox" id="showDrop">
+              <label for="showDrop" class="mobile-item">Dropdown Menu</label>
+              <ul class="drop-menu">
+                <li><a href="#">Drop menu 1</a></li>
+                <li><a href="#">Drop menu 2</a></li>
+                <li><a href="#">Drop menu 3</a></li>
+                <li><a href="#">Drop menu 4</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="desktop-item">Mega Menu</a>
+              <input type="checkbox" id="showMega">
+              <label for="showMega" class="mobile-item">Mega Menu</label>
+              <div class="mega-box">
+                <div class="content">
+                  <div class="row">
+                
+                  </div>
+                  <div class="row">
+                    <header>Design Services</header>
+                    <ul class="mega-links">
+                      <li><a href="#">Graphics</a></li>
+                      <li><a href="#">Vectors</a></li>
+                      <li><a href="#">Business cards</a></li>
+                      <li><a href="#">Custom logo</a></li>
+                    </ul>
+                  </div>
+                  <div class="row">
+                    <header>Email Services</header>
+                    <ul class="mega-links">
+                      <li><a href="#">Personal Email</a></li>
+                      <li><a href="#">Business Email</a></li>
+                      <li><a href="#">Mobile Email</a></li>
+                      <li><a href="#">Web Marketing</a></li>
+                    </ul>
+                  </div>
+                  <div class="row">
+                    <header>Security services</header>
+                    <ul class="mega-links">
+                      <li><a href="#">Site Seal</a></li>
+                      <li><a href="#">VPS Hosting</a></li>
+                      <li><a href="#">Privacy Seal</a></li>
+                      <li><a href="#">Website design</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li><a href="#">Feedback</a></li>
+          </ul>
+          <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+        </div>
+      </nav>
+
+</header>
+
+
+
+
+<!-- End of the navmenu-->
+<div id="sizechange">
+
+{% for p in details %}
+<section class="section" id="product" >
+
+        <div class="row" >
+            <div class="col-lg-3" style=" margin-left: 300px;">
+            <div class="left-images product"  data-product-id="{{ p.id }}">
+                {%if p.image %}
+                <img src="{{p.image.url}}" alt="">{%endif%}
+               
+               {% if default == "nodefault"%}
+               <a data-product="{{p.id}}" class="link-button " id="add_to_cart"  > ADD TO CART</a>
+               
+               {%else%}
+                {% for x in cart%}
+                {% if x == 'yes' %}
+                <a data-product="{{p.id}}" class="link-button add-to-cart" id="add_to_cart"  > ADD TO CART</a>
+                {% else %}
+                      <a data-product="{{p.id}}" class="link-button add-to-cart" id="add_to_cart"  > ADD TO CART</a>
+                
+
+                         {% endif %}
+                  {% endfor %}
+                {%endif%}
+
+
+                {% if default == "nodefault"%}
+                <a   data-product="{{p.id}}" class="link-button2-indetail " id="add_to_wishlist" >  WISHLIST</a>
+                {%else%}
+                    {%if wish%}
+                    <a   class="link-button2-indetail add-to-wishlist " id="add_to_wishlist " >
+                       
+                        WISHLISTED</a>
+                        {%else%}
+                     <a   data-product="{{p.id}}" class="link-button2-indetail add-to-wishlist" id="add_to_wishlist" >
+                       
+                        WISHLIST</a>
+                    {%endif%}
+                {%endif%}
+            </div>
+        </div>
+       
+        <div class="col-lg-5" style=" margin-left: 40px;">
+            <div class="right-content">
+                <h4 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 26px;">{{p.name}}</h4>
+             
+                <span style="font-size: 20px; ">Product ID : {{p.id}}</span>
+
+                <div class="line1" ></div>
+                <div style=" display: flex;">
+                  <h6 style="font-size: 24px; margin-top: 10px;">
+                    <i class="fa fa-rupee"  ></i>{{p.Offer_price }}</h6>
+
+                    <div style="margin-left: 20px; margin-top: -20px;  display: flex;">
+                     <span style=" font-size: 24px; font-weight: 11px;font-family: Arial;">MRP :   </span> &nbsp; 
+                     <span style="text-decoration: line-through;  font-size: 24px;">
+                         <i class="fa fa-rupee" style="text-decoration: line-through; " ></i>{{p.price}} </span> 
+                        &nbsp;&nbsp; 
+                        <span style="color: red;  font-size: 24px;">({{p.deal}}% Off)</span>
+                      </div> 
+
+
+                </div>
+
+               
+                <div style="display: flex;  margin-top: 20px;">
+                  <span style="font-family: Arial; font-size: 24px; font-weight: 11px; color: black; padding-right: 10px; margin-top: 18px;">size </span>
+               <div class="size-chart">
+                  {%if default == "nodefault" %}
+                  <h5 style="margin-top: 15px;">-- This item with your size out of stock now!!!!</h5>
+                  {%else%}
+                  {% if p.varient.zerotothreeM > 0 %}
+                        {% if default == "zerotothreeM" %}
+                        <input type="text" value={{default}} id="sizevalue" hidden >
+                          <button class="size-changer" data-product-id="{{ p.id }}"  name="zerotothreeM" style="border-width: 2px; border-color: rgb(34, 34, 34);"> 0 - 3M</button>
+                        {%else %}
+                          <button class="size-changer" data-product-id="{{ p.id }}"  name="zerotothreeM" > 0 - 3M</button>
+                        {%endif%}
+                  {%endif%}
+
+                  {% if p.varient.threetosixM > 0 %}
+                        {% if default == "threetosixM" %}
+                        <input type="text" value={{default}} id="sizevalue" hidden>
+                        <button class="size-changer" data-product-id="{{ p.id }}" style="border-width: 2px; border-color: rgb(34, 34, 34);"  name="threetosixM" > 3 - 6M</button>
+             
+                        {%else%}
+                        <button class="size-changer" data-product-id="{{ p.id }}"  name="threetosixM" > 3 - 6M</button>
+                        {%endif%}
+                    {%endif%}
+
+
+                  {% if p.varient.sixtonineM > 0 %}
+                      {% if default == "sixtonineM" %}
+                      <input type="text" value={{default}} id="sizevalue" hidden>
+                      <button class="size-changer" data-product-id="{{ p.id }}"  name="sixtonineM" style="border-width: 2px; border-color: rgb(34, 34, 34);"> 6 - 9M</button>
+                      {%else%}
+                      <button class="size-changer" data-product-id="{{ p.id }}"  name="sixtonineM"> 6 - 9M</button>
+                      {%endif%}
+                   {%endif%}
+
+                  {% if p.varient.ninetotwelveM > 0 %}
+                        {%if default == "ninetotwelveM" %}
+                        <input type="text" value={{default}} id="sizevalue" hidden>
+                        <button  class="size-changer" data-product-id="{{ p.id }}"  name="ninetotwelveM" style="border-width: 2px; border-color: rgb(34, 34, 34);"> 9 - 12M</button>
+                        {%else%}
+                        <button class="size-changer" data-product-id="{{ p.id }}"   name="ninetotwelveM" > 9 - 12M</button>
+                        {%endif%}
+                  {%endif%}
+
+                  {% if p.varient.twelvetoeighteenM > 0 %}
+                      {% if default == "twelvetoeighteenM" %}
+                      <input type="text" value={{default}} id="sizevalue" hidden>
+                      <button  class="size-changer" data-product-id="{{ p.id }}"  name="tweletoeighteenM" style="border-width: 2px; border-color: rgb(34, 34, 34);"> 12 - 18M</button>
+                      {%else%}
+                      <button  class="size-changer" data-product-id="{{ p.id }}"  name="tweletoeighteenM"> 12 - 18M</button>
+                      {%endif%}
+                      
+                  {%endif%}
+
+
+                  {% if p.varient.eighteentotwentyfourM > 0 %}
+                        {% if default == "eighteentotwentyfourM" %}
+                        <input type="text" value={{default}} id="sizevalue" hidden>
+                        <button  class="size-changer" data-product-id="{{ p.id }}"  name="eighteentotwentyfourM" style="border-width: 2px; border-color: rgb(34, 34, 34);"> 18 - 24M</button>
+                        {%else%}
+                        <button  class="size-changer" data-product-id="{{ p.id }}"  name="eighteentotwentyfourM"> 18 - 24M</button>
+                     
+                        {%endif%}
+                         
+                  {%endif%}
+
+                  {% if p.varient.twotofourY > 0 %}
+                      {% if default == "twotofourY" %}
+                      <input type="text" value={{default}} id="sizevalue" hidden>
+                      <button class="size-changer" data-product-id="{{ p.id }}" style="border-width: 2px; border-color: rgb(34, 34, 34);"  name="twotofourY"> 2 - 4Y</button>
+                      
+                      {%else%}
+                      <button class="size-changer" data-product-id="{{ p.id }}"  name="twotofourY"> 2 - 4Y</button>
+                      
+                      {%endif%}    
+                  {%endif%}
+
+
+                  {%if p.varient.fourtosixY > 0 %}
+                        {% if default == "fourtosixY" %}
+                        <input type="text" value={{default}} id="sizevalue" hidden>
+                        <button class="size-changer" data-product-id="{{ p.id }}" style="border-width: 2px; border-color: rgb(34, 34, 34);"   name="fourtosixY">4 - 6Y</button>
+                      
+                        {%else%}
+                        <button class="size-changer" data-product-id="{{ p.id }}"  name="fourtosixY">4 - 6Y</button>
+                      
+                        {%endif%}
+                   {%endif%}
+
+
+                  {%if p.varient.sixtoeightY > 0 %}
+                    {% if default == "sixtoeight" %}
+                    <input type="text" value={{default}} id="sizevalue" hidden>
+                    <button class="size-changer" data-product-id="{{ p.id }}" style="text-decoration: underline;"  name="sixtoeightY">6 - 8Y</button>
+              
+                    {%else%}
+                    <button class="size-changer" data-product-id="{{ p.id }}"  name="sixtoeightY">6 - 8Y</button>
+              
+                    {%endif%}
+                 
+                  {%endif%}
+                  {%endif%}
+
+                </div>
+              </div>
+              <div class="line1" style="margin-top: 40px;"></div>
+                    <div class="left-content" style=" width: 100%;">
+                        <span><h6 style="font-size: 18px; color: rgb(47, 47, 47); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">PRODUCT DESCRIPTION</h6></span>
+                        <div class="col-lg-6" style="  margin-top: 12px; ">
+                            <div class="description">
+                              {%if p.brand.name%}
+                              <h6>Brand  : &nbsp; {{p.brand.name}}</h6>
+                              {%endif%}
+                              {% if p.necktype %}
+                              <h6>Neck Type  :   &nbsp;  {{p.necktype}} </h6> 
+                              {%endif%}
+                              {%if p.sleevetype %}
+                              <h6>Sleeve Length : &nbsp; {{p.sleevetype}}</h6>
+                              {%endif%}
+                              {%if p.length %}
+                              <h6>Pant Length : &nbsp;{{p.length}} </h6>
+                              {%endif%}
+                              {%if p.waist %}
+                              <h6>Waist  : &nbsp;{{p.waist}}</h6>
+                              {%endif%}
+                              {%if p.gender %}
+                              <h6>Gender : &nbsp;{{p.gender}}</h6>
+                              {%endif%}
+                        
+                          
+                          </div>
+                         
+                        </div>
+                        
+                    </div>
+                    <div class="line1" style="margin-top: 40px;"></div>
+
+                    <div class="brand-information" style="display: flex;">
+                      <div>
+                      {%if p.brand.logo%}
+                      <img src="{{p.brand.logo.url}}" alt="">
+                      {%endif%}</div>
+                      <div style="width: 900px;">{{p.brand.description}}</div>
+                     
+                   
+                    </div>
+              
+                
+            </div>
+        </div>
+        </div>
+   
+</section>
+{% endfor %}
+</div>
+<!-- ***** Footer Start ***** -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="first-item">
+                    <div class="logo">
+                        <img src="{% static 'images/fc_logo.png' %}" alt="hexashop ecommerce templatemo">
+                    </div>
+                    <ul>
+                        <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
+                        <li><a href="#">firstcry.com</a></li>
+                        <li><a href="#">010-020-0340</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h4>Shopping &amp; Categories</h4>
+                <ul>
+                    <li><a href="#">Men’s Shopping</a></li>
+                    <li><a href="#">Women’s Shopping</a></li>
+                    <li><a href="#">Kid's Shopping</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Useful Links</h4>
+                <ul>
+                    <li><a href="#">Homepage</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Help &amp; Information</h4>
+                <ul>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">FAQ's</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Tracking ID</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-12">
+                <div class="under-footer">
+                    <p>Copyright © 2022 Firstcry. All Rights Reserved. 
+                    
+                   
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  </footer>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+
+  <script src="{% static 'js/quantity.js' %}"></script>
+  <script src="{% static 'js/adding.js' %}"></script>
+  <script>
+
+  </script>
+  
+
+
+  
+  </body>
+  </html>

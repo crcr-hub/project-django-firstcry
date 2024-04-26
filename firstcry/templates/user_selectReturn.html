@@ -1,0 +1,373 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatic Carousel</title>
+
+  <link rel="stylesheet" type="text/css" href=" {% static 'styles/css.css' %}" />
+
+
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap.min.css ' %}">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'styles/font-awesome.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/templatemo-hexashop.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/menubar.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/new.css' %}">
+
+  <link rel="stylesheet" href="{% static 'styles/foruser.css' %}">
+
+  <link rel="stylesheet" href="{% static 'adminstyle2/css/style.css' %}">
+  <!-- End layout styles -->
+  <link rel="shortcut icon" href="{% static 'adminstyle2/images/favicon.ico' %}" />
+
+
+
+
+<style>
+
+   #menu1234 {
+
+    background-color: #ffffff;
+    color: rgb(16, 16, 16);
+    padding: 20px;
+}
+
+#data {
+    flex: 1;
+    padding: 20px;
+}
+
+#menu1234 a {
+    text-decoration: none;
+    color: rgb(10, 10, 10);
+    display: block;
+    margin-bottom: 10px;
+    font-size: 15px;
+    height: 35px;
+    border-top: 5px solid #fefcfc; /* Initially set the top border */
+    transition: border-top-color 0.3s; /* Transition for a smooth effect */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#menu1234 a:hover {
+    background-color: #c6c5c5;
+    border-top-color: #c6c5c5; /* Change the top border color on hover */
+}
+#menu1234 a span{
+    margin-left: 20px;
+}
+body {
+  background-color: rgb(239, 234, 234);
+}
+#images {
+  flex-grow: 1; /* This makes the images div take up the remaining space */
+  display: block;
+  flex-wrap: wrap; /* Allow images to wrap to the next line */
+  justify-content: space-between; /* Adjust the spacing between columns */
+  padding: 20px;
+}
+
+#images img {
+  width: 100%; /* Adjust the width of each image, accounting for spacing */
+  margin-bottom: 20px; /* Add some spacing between images */
+  box-sizing: border-box; /* Include padding and border in the width */
+}
+
+
+
+.edit-container {
+    display: none;
+}
+
+</style>
+</head>
+<body>
+<header>
+
+  <div >
+    <div class="mainlogo"><img src="{% static 'images/fc_logo.png' %}" alt="">  
+                    <div class="about">
+                        
+                        <ul>
+
+                          <li><a href="{% url 'logout'%}">Logout | </a></li>
+                          <li><a href="{% url 'useraccount'%}">Account </a><span>|</span></li>
+                            <li><a href="{% url 'wishlist' %}">Wishlist </a><span>|</span></li>
+                            <li><a href="{% url 'cart' %}">Cart</a></li>
+            
+                        </ul>
+                    </div>
+        </div>
+    </div>   
+
+    <!-- ***** Header Area End ***** -->
+
+  <!-- navmenu -->
+    <nav >
+        <div class="wrapper">
+          <input type="radio" name="slider" id="menu-btn">
+          <input type="radio" name="slider" id="close-btn">
+          <ul class="nav-links">
+            <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
+            <li><a href="{% url 'userhome' %}">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li>
+              <a href="#" class="desktop-item">Dropdown Menu</a>
+              <input type="checkbox" id="showDrop">
+              <label for="showDrop" class="mobile-item">Dropdown Menu</label>
+              <ul class="drop-menu">
+                <li><a href="#">Drop menu 1</a></li>
+                <li><a href="#">Drop menu 2</a></li>
+                <li><a href="#">Drop menu 3</a></li>
+                <li><a href="#">Drop menu 4</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#" class="desktop-item">Mega Menu</a>
+              <input type="checkbox" id="showMega">
+              <label for="showMega" class="mobile-item">Mega Menu</label>
+              <div class="mega-box">
+                <div class="content">
+                  <div class="row">
+                
+                  </div>
+                  <div class="row">
+                    <header>Design Services</header>
+                    <ul class="mega-links">
+                      <li><a href="#">Graphics</a></li>
+                      <li><a href="#">Vectors</a></li>
+                      <li><a href="#">Business cards</a></li>
+                      <li><a href="#">Custom logo</a></li>
+                    </ul>
+                  </div>
+                  <div class="row">
+                    <header>Email Services</header>
+                    <ul class="mega-links">
+                      <li><a href="#">Personal Email</a></li>
+                      <li><a href="#">Business Email</a></li>
+                      <li><a href="#">Mobile Email</a></li>
+                      <li><a href="#">Web Marketing</a></li>
+                    </ul>
+                  </div>
+                  <div class="row">
+                    <header>Security services</header>
+                    <ul class="mega-links">
+                      <li><a href="#">Site Seal</a></li>
+                      <li><a href="#">VPS Hosting</a></li>
+                      <li><a href="#">Privacy Seal</a></li>
+                      <li><a href="#">Website design</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li><a href="#">Feedback</a></li>
+          </ul>
+          <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+        </div>
+      </nav>
+
+</header>
+<div style="width: 100%; height: 100px;">
+
+</div>
+
+<!-- End of the navmenu-->
+
+
+
+  <!-- partial:partials/_sidebar.html -->
+  
+
+
+  <div >
+    <div class="container" >
+    <div style="display: flex; background-color: #ffffff;">
+
+       
+              <div id="menu1234" style="width: 300px;">
+                <h3>My Account</h2>
+                  <div style="height: 20px;"></div>
+               
+                <div style="height: 40px; background-color: bisque;"> <h5 style=" border-top: 10px solid bisque; margin-left: 10px; " >My Orders </h4></div>
+                <div style="height: 20px;"></div>
+                <div > <a href="{% url 'orderhistory' %}" ><span >Order Hisotory</span></a></div>
+                <div style="background-color: #c6c5c5;"><a href="{% url 'showReturnedOrders' %}"><span>Manage Returns</span></a></div>
+                <div ><a href="#" ><span>Track Order</span></a></div>
+                <div style="height: 20px;"></div>
+                <div style="height: 20px;"></div>
+         
+                <div style="height: 40px; background-color: bisque;"> <h5 style=" border-top: 10px solid bisque; margin-left: 10px; " >My Profile </h4></div>
+                <div style="height: 20px;"></div>
+                <div  > <a href="{% url 'personal' %}" ><span >Personal Details</span></a></div>
+                <div ><a href="{% url 'show_changepassword' %}"><span>Change Password</span></a></div>
+                <div ><a href="{% url 'show_address' %}" ><span>My address Book</span></a></div>
+                <div style="height: 20px;"></div>
+                <div style="height: 20px;"></div>
+         
+                <div style="height: 40px; background-color: bisque;"> <h5 style=" border-top: 10px solid bisque; margin-left: 10px; " >My Wallet </h4></div>
+                  <div style="height: 20px;"></div>
+                  <div  > <a href="{% url 'show_wallet' %}" ><span >Cash in Wallet</span></a></div>
+                  <div  > <a href="{% url 'show_wallet' %}" ><span >Refund Transactions</span></a></div>
+            </div>
+     
+            <div id="images" style="background-color: #ffffff;; margin-left: 50px;  box-shadow: 2px 2px 5px;">
+              <!-- Your images go here -->
+              <div style="height: 40px;"> <h5 style=" margin-left: 10px; "> Return</h4></div>
+                <div style="height: 10px;width: 100%; border-radius: 10px; background-color:rgb(239, 234, 234);"></div>
+              <div style=" width: 100%; ">
+                <br>
+               <h5 style="margin-left: 5px;">Return  a Product</h5>
+               {% if none_details == False %}
+
+               <h5>You  have no product to return</h5>
+               {%else%}
+               
+               <form action="{% url 'editreturnpage' %}" method="post">
+                {%csrf_token%}
+               
+               <div class="form-group">
+                <label for="exampleFormControlSelect3">Select a Order</label>
+                <select class="form-control form-control-sm" id="exampleFormControlSelect3" name="prod">
+                    {% for x in details%}
+                    <option value="{{x.id}}">{{x.id}}</option>
+                    {% endfor %}
+                </select>
+                
+              </div>
+              <div class="form-group">
+                <label for="exampleTextarea1">Reason For Returning</label>
+                <textarea class="form-control" id="exampleTextarea1" rows="4" name="reason"></textarea>
+              </div>
+              <button type="submit" class="btn btn-gradient-primary me-2">Return</button>
+        
+
+            </form>
+
+            {%endif%}
+
+                <!--
+                    new div
+                -->
+
+
+
+  <!--
+                    new div
+                -->
+
+
+              </div>
+             
+             
+          </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ***** Footer Start ***** -->
+<footer >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="first-item">
+                    <div class="logo">
+                        <img src="{% static 'images/fc_logo.png' %}" alt="hexashop ecommerce templatemo">
+                    </div>
+                    <ul>
+                        <li><a href="#">16501 Collins Ave, Sunny Isles Beach, FL 33160, United States</a></li>
+                        <li><a href="#">firstcry.com</a></li>
+                        <li><a href="#">010-020-0340</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <h4>Shopping &amp; Categories</h4>
+                <ul>
+                    <li><a href="#">Men’s Shopping</a></li>
+                    <li><a href="#">Women’s Shopping</a></li>
+                    <li><a href="#">Kid's Shopping</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Useful Links</h4>
+                <ul>
+                    <li><a href="#">Homepage</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3">
+                <h4>Help &amp; Information</h4>
+                <ul>
+                    <li><a href="#">Help</a></li>
+                    <li><a href="#">FAQ's</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">Tracking ID</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-12">
+                <div class="under-footer">
+                    <p>Copyright © 2022 Firstcry. All Rights Reserved. 
+                    
+                   
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-behance"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  </footer>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="{% static 'js/custom.js' %}"></script>
+
+  <script src="{% static 'js/quantity.js' %}"></script>
+  <script src="{% static 'js/adding.js' %}"></script>
+  
+  
+  <script>
+    function showEditForm() {
+        document.getElementById('view-container').style.display = 'none';
+        document.getElementById('edit-container').style.display = 'block';
+    }
+
+    function saveChanges() {
+       
+
+        document.getElementById('view-container').style.display = 'block';
+        document.getElementById('edit-container').style.display = 'none';
+    }
+</script>
+  </body>
+  </html>

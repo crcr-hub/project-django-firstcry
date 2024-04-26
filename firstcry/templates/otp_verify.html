@@ -1,0 +1,40 @@
+{% extends 'baseForLoginandRegister.html' %}
+
+
+{% block htmlhead %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'styles/css.css' %}">    
+<style>
+    h6{
+        font-size: 12px;
+    }
+    .resend:hover  .h6{
+        text-decoration: underline;
+
+    }
+</style> 
+{% endblock htmlhead %} 
+
+{% block content %}
+<div style="height: 100%; width: 100%; margin-top: 100px; margin-left: 50px;">
+
+    <form action="verify_otp" method="post">
+        {% csrf_token %}
+
+        <div style="margin-left: 200px;"><h6>Enter OTP</h6> 
+            <input type="text" name="otp" style="width: 300px"></div>
+        <div style="margin-left: 200px;">
+            {% for message in messages %}
+            <h6 style="color: red;">{{message}}</h6>
+            {% endfor %}
+         </div>
+       <div style="margin-left: 200px; width: 400px;"> 
+        <button class="button-87" type="submit" style="width: 250px;" >Enter</button>
+        <a class="resend" href="{% url 'resend_otp' %}"> <h6 class="h6" >Click Here to resend OTP </h6></a>
+        
+        </div>
+    </form>
+
+   
+</div>
+    {% endblock %}

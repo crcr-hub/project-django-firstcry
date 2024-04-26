@@ -1,0 +1,209 @@
+{%load static%}
+{% for p in details %}
+<section class="section" id="product" >
+
+        <div class="row" >
+            <div class="col-lg-3" style=" margin-left: 300px;">
+            <div class="left-images product"  data-product-id="{{ p.id }}">
+                {%if p.image %}
+                <img src="{{p.image.url}}" alt="">{%endif%}
+               
+               
+                {% for x in cart%}
+                {% if x == 'yes' %}
+                <a data-product="{{p.id}}" class="link-button add-to-cart" id="add_to_cart"  > ADD TO CART</a>
+                {% else %}
+                      <a data-product="{{p.id}}" class="link-button add-to-cart" id="add_to_cart"  > ADD TO CART</a>
+                
+
+                         {% endif %}
+                  {% endfor %}
+
+                    
+                  {%if wish.yes%}
+
+                    <a   class="link-button2-indetail add-to-wishlist "  data-product="{{p.id}}" id="add_to_wishlist" > WISHLISTED</a>
+                        {%else%}
+                     <a   data-product="{{p.id}}" class="link-button2-indetail add-to-wishlist" id="add_to_wishlist" >WISHLIST</a>
+                    {%endif%}
+                
+            </div>
+        </div>
+       
+        <div class="col-lg-5" style=" margin-left: 40px;">
+            <div class="right-content">
+                <h4 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: 26px;">{{p.name}}</h4>
+             
+                <span style="font-size: 20px; ">Product ID : {{p.id}}</span>
+
+                <div class="line1" ></div>
+                <div style=" display: flex;">
+                  <h6 style="font-size: 24px; margin-top: 10px;">
+                    <i class="fa fa-rupee"  ></i>{{p.Offer_price }}</h6>
+
+                    <div style="margin-left: 20px; margin-top: -20px;  display: flex;">
+                     <span style=" font-size: 24px; font-weight: 11px;font-family: Arial;">MRP :   </span> &nbsp; 
+                     <span style="text-decoration: line-through;  font-size: 24px;">
+                         <i class="fa fa-rupee" style="text-decoration: line-through; " ></i>{{p.price}} </span> 
+                        &nbsp;&nbsp; 
+                        <span style="color: red;  font-size: 24px;">({{p.deal}}% Off)</span>
+                      </div> 
+
+
+                </div>
+
+               
+                <div style="display: flex;  margin-top: 20px;">
+                  <span style="font-family: Arial; font-size: 24px; font-weight: 11px; color: black; padding-right: 10px; margin-top: 18px;">size </span>
+               <div class="size-chart">
+                  
+                  {% if p.varient.zerotothreeM > 0 %}
+                        {% if default == "zerotothreeM" %}
+                        <input type="text" value={{default}} id="sizevalue" hidden>
+                          <button class="size-changer" data-product-id="{{ p.id }}"  name="zerotothreeM" style="border-width: 2px; border-color: rgb(34, 34, 34);"> 0 - 3M</button>
+                        {%else %}
+                          <button class="size-changer" data-product-id="{{ p.id }}"  name="zerotothreeM" > 0 - 3M</button>
+                        {%endif%}
+                  {%endif%}
+
+                  {% if p.varient.threetosixM > 0 %}
+                        {% if default == "threetosixM" %}
+                        <input type="text" value={{default}} id="sizevalue" hidden>
+                        <button class="size-changer" data-product-id="{{ p.id }}" style="border-width: 2px; border-color: rgb(34, 34, 34);"  name="threetisixM" > 3 - 6M</button>
+             
+                        {%else%}
+                        <button class="size-changer" data-product-id="{{ p.id }}"  name="threetisixM" > 3 - 6M</button>
+                        {%endif%}
+                    {%endif%}
+
+
+                  {% if p.varient.sixtonineM > 0 %}
+                      {% if default == "sixtonineM" %}
+                      <input type="text" value={{default}} id="sizevalue" hidden>
+                      <button class="size-changer" data-product-id="{{ p.id }}"  name="sixtonineM" style="border-width: 2px; border-color: rgb(34, 34, 34);"> 6 - 9M</button>
+                      {%else%}
+                      <button class="size-changer" data-product-id="{{ p.id }}"  name="sixtonineM"> 6 - 9M</button>
+                      {%endif%}
+                   {%endif%}
+
+                  {% if p.varient.ninetotwelveM > 0 %}
+                        {%if default == "ninetotwelveM" %}
+                        <input type="text" value={{default}} id="sizevalue" hidden>
+                        <button  class="size-changer" data-product-id="{{ p.id }}"  name="ninetotwelveM" style="border-width: 2px; border-color: rgb(34, 34, 34);"> 9 - 12M</button>
+                        {%else%}
+                        <button class="size-changer" data-product-id="{{ p.id }}"   name="ninetotwelveM" > 9 - 12M</button>
+                        {%endif%}
+                  {%endif%}
+
+                  {% if p.varient.twelvetoeighteenM > 0 %}
+                      {% if default == "twelvetoeighteenM" %}
+                      <input type="text" value={{default}} id="sizevalue" hidden>
+                      <button  class="size-changer" data-product-id="{{ p.id }}"  name="twelvetoeighteenM" style="border-width: 2px; border-color: rgb(34, 34, 34);"> 12 - 18M</button>
+                      {%else%}
+                      <button  class="size-changer" data-product-id="{{ p.id }}"  name="twelvetoeighteenM"> 12 - 18M</button>
+                      {%endif%}
+                      
+                  {%endif%}
+
+
+                  {% if p.varient.eighteentotwentyfourM > 0 %}
+                        {% if default == "eighteentotwentyfourM" %}
+                        <input type="text" value={{default}} id="sizevalue" hidden>
+                        <button  class="size-changer" data-product-id="{{ p.id }}"  name="eighteentotwentyfourM" style="border-width: 2px; border-color: rgb(34, 34, 34);"> 18 - 24M</button>
+                        {%else%}
+                        <button  class="size-changer" data-product-id="{{ p.id }}"  name="eighteentotwentyfourM"> 18 - 24M</button>
+                     
+                        {%endif%}
+                         
+                  {%endif%}
+
+                  {% if p.varient.twotofourY > 0 %}
+                      {% if default == "twotofourY" %}
+                      <input type="text" value={{default}} id="sizevalue" hidden>
+                      <button class="size-changer" data-product-id="{{ p.id }}" style="border-width: 2px; border-color: rgb(34, 34, 34);"  name="twotofourY"> 2 - 4Y</button>
+                      
+                      {%else%}
+                      <button class="size-changer" data-product-id="{{ p.id }}"  name="twotofourY"> 2 - 4Y</button>
+                      
+                      {%endif%}
+
+                     
+                  {%endif%}
+
+
+                  {%if p.varient.fourtosixY > 0 %}
+                        {% if default == "fourtosixY" %}
+                        <input type="text" value={{default}} id="sizevalue" hidden>
+                        <button class="size-changer" data-product-id="{{ p.id }}" style="border-width: 2px; border-color: rgb(34, 34, 34);"   name="fourtosixY">4 - 6Y</button>
+                      
+                        {%else%}
+                        <button class="size-changer" data-product-id="{{ p.id }}"  name="fourtosixY">4 - 6Y</button>
+                      
+                        {%endif%}
+                   {%endif%}
+
+
+                  {%if p.varient.sixtoeightY > 0 %}
+                    {% if default == "sixtoeightY" %}
+                    <input type="text" value={{default}} id="sizevalue" hidden>
+                    <button class="size-changer" data-product-id="{{ p.id }}" style="border-width: 2px; border-color: rgb(34, 34, 34);"  name="sixtoeightY">6 - 8Y</button>
+              
+                    {%else%}
+                    <button class="size-changer" data-product-id="{{ p.id }}"  name="sixtoeightY">6 - 8Y</button>
+              
+                    {%endif%}
+                 
+                  {%endif%}
+                  
+                </div>
+              </div>
+              <div class="line1" style="margin-top: 40px;"></div>
+                    <div class="left-content" style=" width: 100%;">
+                        <span><h6 style="font-size: 18px; color: rgb(47, 47, 47); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">PRODUCT DESCRIPTION</h6></span>
+                        <div class="col-lg-6" style="  margin-top: 12px; ">
+                            <div class="description">
+                              {%if p.brand.name%}
+                              <h6>Brand  : &nbsp; {{p.brand.name}}</h6>
+                              {%endif%}
+                              {% if p.necktype %}
+                              <h6>Neck Type  :   &nbsp;  {{p.necktype}} </h6> 
+                              {%endif%}
+                              {%if p.sleevetype %}
+                              <h6>Sleeve Length : &nbsp; {{p.sleevetype}}</h6>
+                              {%endif%}
+                              {%if p.length %}
+                              <h6>Pant Length : &nbsp;{{p.length}} </h6>
+                              {%endif%}
+                              {%if p.waist %}
+                              <h6>Waist  : &nbsp;{{p.waist}}</h6>
+                              {%endif%}
+                              {%if p.gender %}
+                              <h6>Gender : &nbsp;{{p.gender}}</h6>
+                              {%endif%}
+                        
+                          
+                          </div>
+                         
+                        </div>
+                        
+                    </div>
+                    <div class="line1" style="margin-top: 40px;"></div>
+
+                    <div class="brand-information" style="display: flex;">
+                      <div>
+                      {%if p.brand.logo%}
+                      <img src="{{p.brand.logo.url}}" alt="">
+                      {%endif%}</div>
+                      <div style="width: 900px;">{{p.brand.description}}</div>
+                     
+                   
+                    </div>
+              
+                
+            </div>
+        </div>
+        </div>
+   
+</section>
+{% endfor %}
+<script src="{% static 'js/adding.js' %}"></script>

@@ -1,0 +1,254 @@
+
+{% extends 'basefor_notlogin_user.html' %}
+{% load static %}
+{% block content %}
+<section class="section" id="products" style="margin-top: 5%; ">
+  
+    <div class="foralighn" style="width: 100%;   display: flex ;">
+    <div style="background-color: rgb(242, 243, 243); margin-left: 10%;  width: 250px;">
+      <div style="background-color: rgb(226, 226, 226); height: 45px; padding-bottom: 10px;">
+        <h2 style="padding-top: 10px;padding-left: 10px;     font-family: RobotoMB;font-size: 18px;font-weight: bold; line-height: 21px;
+        color: #424242;" >FILTER BY</h2>
+      </div>
+      <div style="height: 5px;"></div>
+      <div style=" height: 45px; padding-bottom: 10px;">
+        <h2 style="padding-top: 10px;   font-family: RobotoMB;font-size: 18px; font-weight: bold;line-height: 21px;
+        color: #424242;" >NECK TYPE</h2>
+      </div>
+
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;" type="checkbox" name="amountUnder300"  data-filter="necktype" value="Rounded Neck" class="filter-checkbox">
+          Rounded Neck
+        </label>
+      </li>
+      <li>
+        <label style="height: 35px; cursor: pointer;">
+          <input style="width: 20px; height: 20px;" type="checkbox" name="amountUnder300"  data-filter="necktype" value="Collar" class="filter-checkbox">
+          Collar Neck
+        </label>
+      </li>
+      <div class="line"></div>
+      <div style=" height: 45px; padding-bottom: 10px;">
+        <h2 style="padding-top: 10px;   font-family: RobotoMB;font-size: 18px; font-weight: bold;line-height: 21px;
+        color: #424242;" >PRICE</h2>
+      </div>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="Offer_price"  value="0and250and"  class="filter-checkbox">
+          <i class="fa fa-rupee" style="text-decoration: line-through;" ></i> 0 to 250
+        </label>
+      </li>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="Offer_price"  value="250and500"  class="filter-checkbox">
+          <i class="fa fa-rupee" style="text-decoration: line-through;" ></i> 250 to 500
+        </label>
+      </li>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="Offer_price"  value="500and1000"  class="filter-checkbox">
+          <i class="fa fa-rupee" style="text-decoration: line-through;" ></i> 500 to 1000
+        </label>
+      </li>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="Offer_price"  value="1000and2000"  class="filter-checkbox">
+          <i class="fa fa-rupee" style="text-decoration: line-through;" ></i>1000 to 2000
+        </label>
+      </li>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="Offer_price"  value="2000and3000"  class="filter-checkbox">
+          <i class="fa fa-rupee" style="text-decoration: line-through;" ></i> 2000 to 3000
+        </label>
+      </li>
+      <div class="line"></div>
+      <div style=" height: 45px; padding-bottom: 10px;">
+        <h2 style="padding-top: 10px;   font-family: RobotoMB;font-size: 18px; font-weight: bold;line-height: 21px;
+        color: #424242;" > SIZE</h2>
+      </div>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="size"  value="zerotothreeM"  class="filter-checkbox">
+          0 - 3 M
+        </label>
+      </li>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="size"  value="threetosixM"  class="filter-checkbox">
+           3 - 6 M
+        </label>
+      </li>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="size"  value="sixtonineM"  class="filter-checkbox">
+           6 - 9 M
+        </label>
+      </li>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="size"  value="ninetotwelveM"  class="filter-checkbox">
+           9 - 12 M
+        </label>
+      </li>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="size"  value="twelvetoeighteenM"  class="filter-checkbox">
+           12 - 18 M
+        </label>
+      </li>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="size"  value="eighteentotwentyfourM"  class="filter-checkbox">
+           18 - 24 M
+        </label>
+      </li>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="size"  value="twotofourY"  class="filter-checkbox">
+           2 - 4 Y
+        </label>
+      </li>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="size"  value="fourtosixY"  class="filter-checkbox">
+           4 - 6 Y
+        </label>
+      </li>
+      <li>
+        <label>
+          <input style="width: 20px; height: 20px;  "  type="checkbox" name="amountUnder300" data-filter="size"  value="sixtoeightY"  class="filter-checkbox">
+           6 - 8 Y
+        </label>
+      </li>
+      </div>
+    <div class="container" >
+  <div class="row" style="margin-left: -15%; " id="filterproduct">
+  
+   
+   
+    {% for p in details %}
+    {%if p.varient.total > 0 %}
+      <div class="col-lg-4 big" >
+    
+          <div class="item"  id ="parent" style="  display:table-cell; vertical-align:middle; text-align:center; margin-bottom: 2px;" >
+              <div class="thumb product" id="child" data-product-id="{{ p.id }}">
+                <div class="hover-content" style="width: 100%; " id="hover-content">
+                  
+                <a data-product="{{p.id}}" class="link-button add-to-cart" id="add_to_cart"  > ADD TO CART</a>
+                
+
+                 <a   data-product="{{p.id}}" class="link-button2 add-to-wishlist" id=" add_to_wishlist" >
+                 WISHLIST
+                   </a>
+                    
+              </div>
+                  {% if p.image %}
+                  <a href="" >  <img src="{{p.image.url}}" class="image" alt=""  style="width: 380px;">   </a> 
+                  {%endif%}
+              </div>
+       
+              <div class="down-content"  > 
+                  <div style=" height: 50px;"><h6 style="font-size: 15px;">{{p.name}}</h6></div>
+                  <div style="display: flex ; margin-top: 1px;">
+             
+                <div>
+                  <h6 style="font-size: 18px;">
+                    <i class="fa fa-rupee"  ></i>{{p.Offer_price }}</h6>
+                </div>
+                     <div style="margin-left: 20px; margin-top: -2px; display: flex;">
+                      <span style="text-decoration: line-through;">
+                        <i class="fa fa-rupee" style="text-decoration: line-through;" ></i>{{p.price}} </span> 
+                        &nbsp;&nbsp; 
+                        <span style="color: red;">({{p.deal}}% Off)</span>
+                      </div> 
+                      <br>
+                
+               
+                  </div>
+              </div>
+              <div class="color-line" >
+                <div class="color" ><button class="color-button" data-id="{{ p.varient.colors.code }}" ></button>
+                  
+
+                </div>
+                <div class="line"></div>
+                
+              </div>
+              <form action=" {% url 'selectoneproduct' p.id %}" method="post">
+                {% csrf_token %}
+              <div class="size-content" style="line-height: 1px;">
+                  
+                {% if p.varient.zerotothreeM > 0 %}
+                <button type="submit" name="zerotothreeM"> 0 - 3M</button>
+                {%endif%}
+                {% if p.varient.threetosixM > 0 %}
+                <button  type="submit" name="threetosixM" > 3 - 6M</button>
+                {%endif%}
+                {% if p.varient.sixtonineM > 0 %}
+                <button  type="submit" name="sixtonineM"> 6 - 9M</button>
+                {%endif%}
+                {% if p.varient.ninetotwelveM > 0 %}
+                <button  type="submit" name="ninetotwelveM"> 9 - 12M</button>
+                {%endif%}
+                {% if p.varient.twelvetoeighteenM > 0 %}
+                <button  type="submit" name="twelvetoeighteenM"> 12 - 18M</button>
+                {%endif%}
+                {% if p.varient.eighteentotwentyfourM > 0 %}
+                <button  type="submit" name="eighteentotwentyfourM"> 18 - 24M</button>
+                {%endif%}
+                {% if p.varient.twotofourY > 0 %}
+                <button  type="submit" name="twotofourY"> 2 - 4Y</button>
+                {%endif%}
+                {% if p.varient.zerotothreeM > 0 and p.varient.threetosixM > 0 and p.varient.sixtonineM > 0  and p.varient.ninetotwelveM > 0 and  p.varient.twelvetoeighteenM > 0  %}
+                  <button  type="submit" name="more"> +More</button>
+                {%elif  p.varient.sixtonineM > 0  and p.varient.ninetotwelveM > 0 and  p.varient.twelvetoeighteenM > 0 and p.varient.fourtosixY > 0 and p.varient.sixtoeightY > 0  %}
+                  <button  type="submit" name="more"> +More</button>
+                {%else%}
+                  {%if p.varient.fourtosixY > 0 %}
+                  <button type="submit" name="fourtosixY">4 - 6Y</button>
+                  {%endif%}
+                  {%if p.varient.sixtoeightY > 0 %}
+                  <button type="submit" name="sixtoeightY">6 - 8Y</button>
+             
+                  {%endif%}
+                {% endif %}
+
+               
+                 
+              </div>
+            </form>
+               <i></i>
+              </div>
+          </div>
+          {%endif%}
+          {% endfor %}
+      
+          
+      &nbsp;&nbsp;&nbsp; 
+      
+  </div>
+
+</div>
+  </div>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const buttons = document.querySelectorAll('.color-button');
+      buttons.forEach(button => {
+          const color = button.dataset.id;
+          console.log(color)
+          button.style.backgroundColor = color;
+        });
+    });
+</script>
+ 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'js/adding.js' %}"></script>
+
+
+    
+    {% endblock %}
+    {% csrf_token %}

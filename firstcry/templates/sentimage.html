@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section class="section" id="products">
+        <div class="container">
+          <div class="row" style="margin-left: -300px; margin-right: -300px;">
+            {% for x in products %}
+            <a href="{% url 'detailed_products' x.id %}"> Click here</a>
+              <div class="col-lg-4">
+                  <div class="item"  id ="parent"style="" >
+                      <div class="thumb" id="child">
+                        
+                         <input type="text" value="{{p.id}}">
+                       <a href="{% url 'detailed_products' x.id %}">hello {% if x.image %} <img src="{{x.image}}" alt="" style="height: 520px; width: 490px; padding: 2px; "> </a>{%endif%}
+                      </div>
+                      <div class="down-content">
+      
+                         
+                      </div>
+                  </div>
+              </div>
+              {% endfor %}
+              &nbsp;&nbsp;&nbsp;
+      
+      
+      
+      
+         
+          </div>
+      </div>
+      </section>
+</body>
+</html>

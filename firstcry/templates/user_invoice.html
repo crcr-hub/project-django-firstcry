@@ -1,0 +1,123 @@
+<!-- invoice_template.html -->
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice</title>
+    <style>
+        /* Add your CSS styles for the invoice here */
+        /* Example styles */
+        .head {
+            height: 100px;
+            padding: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            width: 150px;
+           
+        }
+        .table td, .table th{
+            height: 40px;
+            text-align: center; 
+            vertical-align: middle;
+            border: solid 1px black;
+        }
+    </style>
+</head>
+<body>
+    <div class="head" >
+       <div style="float: left; margin-top: 20px; background-color: rgb(218, 208, 208); " > <h1 style="font-size: 20px;">Invoice</h1></div>
+       <div style="float: left; margin-left: 500px; ">   <h3>Billing Address</h3>
+       <h5>
+        {{ord.user_name}} <br>
+        {{ord.user_housename}} <br>
+        {{ord.user_street}} <br>
+        {{ord.user_city}} <br>
+        {{ord.user_state}} - {{ord.user_pincode}}
+    </h5>
+    </div>
+        
+        
+       
+   
+        
+     </div>
+     <div>
+        Order ID   : {{ord.id}}
+     </div>
+     <div>
+         <table class="table">
+            <tr>
+                <th style="width: 50px;">No.</th>
+                <th style="width: 350px; " >Products</th>
+              
+                <th style="width: 50px;"> Qnty</th>
+                <th>MRP</th>
+                <th>Offer Price</th>
+               <th>Total Price</th>
+            </tr>
+            {%  for index, item in ord_indx %}
+            <tr>
+                <td>{{ index }}</td>
+                <td> {{item.product.name}} <br>
+                size : {{item.size}}
+                </td>
+           
+                <td>{{item.quantity}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.Offer_price}}</td>
+                <td>{{item.total}}</td>
+            </tr>
+            {%endfor%}
+            <tr>
+                <td style="border: 0px;"></td>
+                <td style="border: 0px;"></td>
+                <td style="border: 0px;"></td>
+             
+                <td>Coupon</td>
+                <td>
+                    {% if ord.coupon %}
+                    {{ord.coupon.name}}   
+                    {%else%}
+                    Nill 
+                    {%endif%}
+                </td>
+                <td>
+                    {% if ord.coupon %}
+                    {{ord.coupon.discount}}%
+                    {%else%}
+                    0%
+                    {%endif%}
+                    
+                </td>
+            </tr>
+            <tr>
+                <td style="border: 0px;"></td>
+                <td style="border: 0px;"></td>
+                <td style="border: 0px;"></td>
+           
+                <td>Shipping Charge</td>
+                <td></td>
+                <td>Free</td>
+            </tr>
+            <tr>
+                <td style="border: 0px;"></td>
+                <td style="border: 0px;"></td>
+                <td style="border: 0px;"></td>
+             
+                <td>Total Amount</td>
+                <td></td>
+                <td>{{ord.total_amount}}</td>
+            </tr>
+         </table>
+         
+ <div style="margin-top: 50px;">-----
+    ------------------------
+    --------------------------------------
+--------------------------------------------------
+--------------------------------------------
+----------------------------------------</div>
+            
+
+ 
+</body>
+</html>

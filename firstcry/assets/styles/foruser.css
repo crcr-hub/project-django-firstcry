@@ -1,0 +1,61 @@
+#parent{
+    height: 550px;
+
+
+}
+#parent img{
+    height: 400px; 
+    width: 380px; 
+    padding: 2px; 
+    margin-left: auto; 
+    margin-right: auto;
+    margin-top: -10%;
+
+   }
+   .big:hover #parent {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      border: 1px solid #141313;
+      margin-top: -2px;
+      transition: all 0.2s;
+   }
+
+
+   .link-button{
+    width: 45%; 
+   }
+   
+   .link-button2{
+    width: 45%; 
+
+   }
+   .hover-content{
+    
+    margin-bottom: -25px;
+   }
+   .down-content{
+    margin-bottom: -25px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    text-align: left;
+    width: 90%;
+    margin-left: 20px;
+    height: 25%;
+
+   }
+   .down-content1{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    left: 15px;
+    bottom: 15px;
+    text-align: center;
+    background-color: rgba(42,42,42,.97);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+   }
+   #parent:hover  .down-content1{
+    opacity: 1px;
+    visibility: visible;
+
+   }

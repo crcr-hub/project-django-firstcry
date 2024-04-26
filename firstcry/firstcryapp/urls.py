@@ -126,6 +126,7 @@ urlpatterns = [
     path('show_wallet',views.show_wallet,name='show_wallet'),
     path('wallet_transaction',views.wallet_transaction,name='wallet_transaction'),
     path('invoice_pdf/<pk>',views.invoice_pdf,name='invoice_pdf'),
+    path('changeChartData',views.changeChartData,name='changeChartData'),
 
 
     # for test

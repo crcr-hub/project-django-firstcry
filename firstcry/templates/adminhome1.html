@@ -363,6 +363,11 @@
                   <div class="card-body" style=" width: 750px;">
                     <div class="clearfix">
                       <h4 class="card-title float-left">Visit And Sales Statistics</h4>
+                      <select name="" id="changing_chart_data">
+                        <option value="month">Monthly Data</option>
+                        <option value="week">Weekly Data</option>
+                        <option value="year">Yearly Data </option>
+                      </select>
                       <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
                     </div>
                     
@@ -636,101 +641,12 @@
     <!-- End custom js for this page -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
+    <script src="{% static 'js/change_chart.js' %}"></script>
   
-    <script>
-      // Sample data for the chart
-      $.ajax({
-        url:'get_monthly_order_data/',  // URL to your Django view
-        type: 'GET',
-        success: function(response) {
-          const labels = [];
-          const salesData = [];
-  
-          // Extract labels and sales data from each entry in the response array
-
-          console.log(response.label)
-          console.log(response.varibles)
-          var lab = response.label
-          var dat = response.varibles
-          var ldata = response.ldata
-         
-       const data = {
-          labels: lab,
-          datasets: [{
-              label: 'Monthly Data',
-              backgroundColor: 'rgba(75, 192, 192, 0.2)',
-              borderColor: 'rgba(75, 192, 192, 1)',
-              borderWidth: 1,
-              data: dat,
-          }]
-      }; 
-      const data1 = {
-        labels: lab,
-        datasets: [{
-            label: 'Monthly Revenue',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 2,
-            fill: false,
-            data: ldata,
-        }]
-    };
-
-      // Create a bar chart
-      const ctx = document.getElementById('myChart').getContext('2d');
-      const myChart = new Chart(ctx, {
-          type: 'bar',
-          data: data,
-      });
-
-       // Create a line chart
-    const ctx1 = document.getElementById('revenueChart').getContext('2d');
-    const revenueChart = new Chart(ctx1, {
-        type: 'line',
-        data: data1,
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-    }
-  });
-  </script> 
 
 
 
 
 
-
-  <!-- <script>
-    // Sample data for the line chart
-    const data1 = {
-        labels: ['January', 'February', 'March', 'April', 'May','June','July'],
-        datasets: [{
-            label: 'Monthly Revenue',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 2,
-            fill: false,
-            data: [100, 200, 100, 400, 500,600,2700],
-        }]
-    };
-
-    // Create a line chart
-    const ctx1 = document.getElementById('revenueChart').getContext('2d');
-    const revenueChart = new Chart(ctx1, {
-        type: 'line',
-        data: data1,
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
-</script> -->
   </body>
 </html>

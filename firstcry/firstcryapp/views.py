@@ -378,9 +378,8 @@ def get_monthly_order_data(request):
     linechartMonthData = []
     monthly_totals = order.objects.annotate(month=ExtractMonth('date')).values('month').annotate(total_amount=Sum('total_amount'))
     for i in reversed(monthly_totals):
-        print(i['total_amount'])
         linechartMonthData.append(float(i['total_amount']))
-    print("this is line chart",linechartMonthData)
+
     
     
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -393,7 +392,141 @@ def get_monthly_order_data(request):
     print(linechartMonthData) 
     return JsonResponse({'label':month_names,'varibles':monthdata,'ldata':linechartMonthData}, safe=False)
 
+#changing chart data
+@user_passes_test(lambda u: u.is_staff)
+@cache_control(no_cashe=True,must_revalidate=True,no_store=True)   
+@login_required(login_url='user_login')
+def changeChartData(request):
+    value = request.GET.get('value')
+    print("this value",value)
+    if value == 'month':
+        current_year = datetime.now().year
+        current_month = datetime.now().month
+
+        # Define the start month
+        start_month = 1  # January
+
+        # Create a list to store the months
+        monthsnum = []
+
+        # Loop through each year and month from the start year to the current year/month
+        for year in range(2024, current_year + 1):
+            start = start_month if year == current_year else 1
+            end = current_month if year == current_year else 12
+            for month in range(start, end + 1):
+                monthsnum.append(month)
+
+        # Now, months contains the list of month numbers from January 2024 up to the current month
+        monthly_sales_order_count = order.objects.filter( date__year=current_year,
+            date__month__lte=current_month).values('date__month').annotate(order_count=Count('id'))
+        print(monthly_sales_order_count)
+
+        monthdata = []
+        for i in reversed(monthly_sales_order_count):
+            monthdata.insert(0,i['order_count'])
+        
+        monthdata.reverse() 
+        print(monthdata)
     
+        length_difference = len(monthsnum) - len(monthdata)
+        monthdata.extend([0] * length_difference)
+        monthdata.reverse() 
+        print(monthdata)
+
+        
+        # for line chart
+        linechartMonthData = []
+        monthly_totals = order.objects.annotate(month=ExtractMonth('date')).values('month').annotate(total_amount=Sum('total_amount'))
+        for i in reversed(monthly_totals):
+            linechartMonthData.append(float(i['total_amount']))
+
+        
+        
+        months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+        month_names = [months[number - 1] for number in monthsnum]
+        
+        l_difference = len(monthsnum) - len(linechartMonthData)
+        linechartMonthData.extend([0] * l_difference)
+    
+        linechartMonthData.reverse() 
+     
+        return JsonResponse({'label':month_names,'varibles':monthdata,'ldata':linechartMonthData}, safe=False)
+    elif value == 'week':
+        current_year = datetime.now().year
+        current_month = datetime.now().month
+
+        # Define start and end dates of the current month
+        start_date = datetime(current_year, current_month, 1)
+        end_date = start_date + timedelta(days=32)
+
+        # Segment the month into weeks
+        week_start = start_date
+        week_end = week_start + timedelta(weeks=1)
+        weeks_count = []
+        week_amount = []
+
+        while week_start < end_date:
+            # Aggregate data for the week
+            weekly_data = order.objects.filter(
+                date__range=[week_start, week_end]
+            ).aggregate(
+            order_count=Count('id'),
+            total_amount=Sum('total_amount') )
+
+            # Extract data for the week
+                    # Extract data for the week
+            order_count = weekly_data['order_count'] or 0
+            total_amount = weekly_data['total_amount'] or 0
+             # Append the data to the list of weeks
+            weeks_count.append( order_count)
+            week_amount .append( total_amount)
+
+            # Move to the next week
+            week_start = week_end
+            week_end = min(week_start + timedelta(weeks=1), end_date)
+
+        # Prepare labels for each week
+        week_labels = [f"Week {i}" for i in range(1, len(weeks_count) + 1)]
+        print("week order count",weeks_count)
+        print("week revnue",week_amount)
+        return JsonResponse({'label':week_labels,'varibles':weeks_count,'ldata':week_amount}, safe=False)
+    elif value == 'year':
+        current_year = datetime.now().year
+
+        # Define start and end years for the last 5 years
+        start_year = current_year - 4
+        end_year = current_year
+
+        # Segment the years
+        yearly_data = []
+        yearly_count = []
+        yearly_amount = []
+
+        for year in range(start_year, end_year + 1):
+            # Aggregate data for the year
+            yearly_sales_order_count = order.objects.filter(
+                date__year=year).values('date__year').annotate(
+                order_count=Count('id'),total_amount=Sum('total_amount')).order_by('date__year')
+
+            # Extract data for the year
+            year_data = yearly_sales_order_count.first()
+            if year_data:
+                order_count = year_data['order_count'] or 0
+                total_amount = year_data['total_amount'] or 0
+            else:
+                order_count = 0
+                total_amount = 0
+
+            # Append the data to the list of years
+            yearly_data.append({'year': year, 'order_count': order_count, 'total_amount': total_amount})
+            yearly_count.append(order_count)
+            yearly_amount.append(total_amount)
+        # Prepare labels for each year
+        year_labels = [str(year['year']) for year in yearly_data]
+        return JsonResponse({'label':year_labels,'varibles':yearly_count,'ldata':yearly_amount}, safe=False)
+   
+
+
 # user personal data ------------------------------------------
 @cache_control(no_cashe=True,must_revalidate=True,no_store=True)
 @login_required(login_url='user_login')

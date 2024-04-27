@@ -311,8 +311,7 @@ def adminhome(request):
     top_selling_product = [(products.objects.get(id=item['product_id']), item['count']) 
                             for item in top_selling_products_with_count]
     
-    for i in top_selling_product:
-        print(i)
+
 
     top_selling_productsIds = order_items.objects.values('product_id') \
                                     .annotate(total_quantity_sold=Sum('quantity')) \
